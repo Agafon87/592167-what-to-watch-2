@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
-const MainPage = () => {
+const MainPage = (props) => {
+  const {films} = props;
+
   return <div>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -102,8 +105,7 @@ const MainPage = () => {
                 alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                Grindelwald</a>
+              <a className="small-movie-card__link" href="movie-page.html">{films[0]}</a>
             </h3>
           </article>
 
@@ -112,7 +114,7 @@ const MainPage = () => {
               <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
+              <a className="small-movie-card__link" href="movie-page.html">{films[1]}</a>
             </h3>
           </article>
 
@@ -121,7 +123,7 @@ const MainPage = () => {
               <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
+              <a className="small-movie-card__link" href="movie-page.html">{films[2]}</a>
             </h3>
           </article>
 
@@ -130,7 +132,7 @@ const MainPage = () => {
               <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
+              <a className="small-movie-card__link" href="movie-page.html">{films[3]}</a>
             </h3>
           </article>
 
@@ -305,6 +307,10 @@ const MainPage = () => {
       </footer>
     </div>
   </div>;
+};
+
+MainPage.propTypes = {
+  films: PropTypes.array
 };
 
 export default MainPage;
