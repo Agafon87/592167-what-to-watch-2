@@ -310,7 +310,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  films: PropTypes.array
+  films: PropTypes.array.isRequired
 };
 
 export default MainPage;

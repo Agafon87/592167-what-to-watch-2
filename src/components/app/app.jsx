@@ -8,7 +8,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array
+  films: PropTypes.array.isRequired,
 };
 
 export default App;
