@@ -10,11 +10,13 @@ export default class MoviesList extends Component {
       film: {}
     };
 
-    this.onCardFocus = (it) => {
+    this.handlerSmallMovieCardMouseOver = (it) => {
       this.setState({
         film: it
       });
     };
+
+    this.handlerSmallMovieCardMouseOver = this.handlerSmallMovieCardMouseOver.bind(this);
   }
 
   render() {
@@ -26,7 +28,7 @@ export default class MoviesList extends Component {
       return <SmallMovieCard
         filmCard={it}
         key={i}
-        onMouseOver={this.onCardFocus}
+        handlerSmallMovieCardMouseOver={this.handlerSmallMovieCardMouseOver}
       />;
     });
 

@@ -9,7 +9,7 @@ it(`SmallMovieCard e2e test is done`, () => {
   const mouseOver = jest.fn();
   const smallMovieCard = shallow(<SmallMovieCard
     filmCard={{}}
-    onMouseOver={mouseOver}/>
+    handlerSmallMovieCardMouseOver={mouseOver}/>
   );
 
   const movieCard = smallMovieCard.find(`.small-movie-card`);
