@@ -1,0 +1,21 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+const SmallMovieCard = (props) => {
+  const {filmCard, handlerSmallMovieCardMouseOver} = props;
+  return <article className="small-movie-card catalog__movies-card" onMouseOver={() => handlerSmallMovieCardMouseOver(filmCard)}>
+    <div className="small-movie-card__image">
+      <img src={filmCard.img} alt={filmCard.name} width="280" height="175"/>
+    </div>
+    <h3 className="small-movie-card__title">
+      <a className="small-movie-card__link" href="movie-page.html">{filmCard.name}</a>
+    </h3>
+  </article>;
+};
+
+SmallMovieCard.propTypes = {
+  filmCard: PropTypes.object,
+  handlerSmallMovieCardMouseOver: PropTypes.func
+};
+
+export default SmallMovieCard;
