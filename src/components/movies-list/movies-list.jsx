@@ -20,15 +20,14 @@ export default class MoviesList extends Component {
   }
 
   render() {
-    const {films} = this.props;
-    const fil = this.state;
-    window.console.log(fil);
+    const {films, handlerSmallMovieCardOnClick} = this.props;
 
     const filmsList = films.map((it, i) => {
       return <SmallMovieCard
         filmCard={it}
         key={i}
         handlerSmallMovieCardMouseOver={this.handlerSmallMovieCardMouseOver}
+        handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
       />;
     });
 
@@ -37,5 +36,6 @@ export default class MoviesList extends Component {
 }
 
 MoviesList.propTypes = {
-  films: PropTypes.array
+  films: PropTypes.array,
+  handlerSmallMovieCardOnClick: PropTypes.func
 };

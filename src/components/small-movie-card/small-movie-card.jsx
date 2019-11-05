@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SmallMovieCard = (props) => {
-  const {filmCard, handlerSmallMovieCardMouseOver} = props;
-  return <article className="small-movie-card catalog__movies-card" onMouseOver={() => handlerSmallMovieCardMouseOver(filmCard)}>
+  const {filmCard, handlerSmallMovieCardMouseOver, handlerSmallMovieCardOnClick} = props;
+  return <article
+    className="small-movie-card catalog__movies-card"
+    onMouseOver={() => handlerSmallMovieCardMouseOver(filmCard)}
+    onClick={() => handlerSmallMovieCardOnClick(filmCard.id)}>
     <div className="small-movie-card__image">
       <img src={filmCard.img} alt={filmCard.name} width="280" height="175"/>
     </div>
@@ -15,7 +18,8 @@ const SmallMovieCard = (props) => {
 
 SmallMovieCard.propTypes = {
   filmCard: PropTypes.object,
-  handlerSmallMovieCardMouseOver: PropTypes.func
+  handlerSmallMovieCardMouseOver: PropTypes.func,
+  handlerSmallMovieCardOnClick: PropTypes.func
 };
 
 export default SmallMovieCard;
