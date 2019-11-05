@@ -7,26 +7,26 @@ export default class MoviesList extends Component {
     super(props);
 
     this.state = {
-      film: {}
+      films: [...this.props.films]
     };
 
-    this.handlerSmallMovieCardMouseOver = (it) => {
-      this.setState({
-        film: it
-      });
+    this.handlerSmallMovieCardMouseEnter = (evt) => {
+      evt.target.play();
+      window.console.log(evt.target);
     };
 
-    this.handlerSmallMovieCardMouseOver = this.handlerSmallMovieCardMouseOver.bind(this);
+    this.handlerSmallMovieCardMouseEnter = this.handlerSmallMovieCardMouseEnter.bind(this);
   }
 
   render() {
     const {films, handlerSmallMovieCardOnClick} = this.props;
+    window.console.log(this.state);
 
     const filmsList = films.map((it, i) => {
       return <SmallMovieCard
         filmCard={it}
         key={i}
-        handlerSmallMovieCardMouseOver={this.handlerSmallMovieCardMouseOver}
+        handlerSmallMovieCardMouseEnter={this.handlerSmallMovieCardMouseEnter}
         handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
       />;
     });

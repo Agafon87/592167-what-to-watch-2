@@ -31,7 +31,7 @@ export default class App extends Component {
       this.setState({
         filmId: id
       });
-      location.pathname = `films-${id}`;
+      // location.pathname = `films-${id}`;
     };
 
     this.handlerSmallMovieCardOnClick = this.handlerSmallMovieCardOnClick.bind(this);
