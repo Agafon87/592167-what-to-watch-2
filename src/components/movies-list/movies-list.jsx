@@ -35,7 +35,7 @@ export default class MoviesList extends Component {
 
   render() {
     const {films, handlerSmallMovieCardOnClick} = this.props;
-    window.console.log(this.state);
+    // window.console.log(this.state);
 
     const filmsList = films.map((it, i) => {
       return <SmallMovieCard

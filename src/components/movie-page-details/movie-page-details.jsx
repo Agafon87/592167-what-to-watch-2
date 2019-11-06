@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const MoviePageDetails = (props) => {
   const {film} = props;
 
-  window.console.log(film);
+  // window.console.log(film);
   return <div>
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">

@@ -13,8 +13,8 @@ const getPageScreen = (props, state, handlerSmallMovieCardOnClick) => {
   switch (location.pathname) {
     case `/`:
       return <MainPage films={films} handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick} onClick={onClick}/>;
-    case `/films`:
-      return <MoviePageDetails films={films[filmId]} />;
+    case `/films-${filmId}`:
+      return <MoviePageDetails film={films[filmId - 1]} />;
   }
   return null;
 };
@@ -32,6 +32,7 @@ export default class App extends Component {
         filmId: id
       });
       // location.pathname = `films-${id}`;
+      window.history.pushState(null, null, `films-${id}`);
     };
 
     this.handlerSmallMovieCardOnClick = this.handlerSmallMovieCardOnClick.bind(this);
