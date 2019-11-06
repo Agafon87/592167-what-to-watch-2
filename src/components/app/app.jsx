@@ -13,8 +13,8 @@ const getPageScreen = (props, state, handlerSmallMovieCardOnClick) => {
   switch (location.pathname) {
     case `/`:
       return <MainPage films={films} handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick} onClick={onClick}/>;
-    case `/films-${filmId}`:
-      return <MoviePageDetails film={films[filmId]} />;
+    case `/films`:
+      return <MoviePageDetails films={films[filmId]} />;
   }
   return null;
 };
