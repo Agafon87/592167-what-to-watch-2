@@ -2,6 +2,12 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
+let timerId;
+
+const startVideo = (elem) => {
+  elem.play();
+}
+
 export default class MoviesList extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +17,20 @@ export default class MoviesList extends Component {
     };
 
     this.handlerSmallMovieCardMouseEnter = (evt) => {
-      evt.target.play();
-      window.console.log(evt.target);
+      const elem = evt.target;
+      timerId = setTimeout(() => {
+        startVideo(elem);
+      }, 1000);
     };
 
     this.handlerSmallMovieCardMouseEnter = this.handlerSmallMovieCardMouseEnter.bind(this);
+
+    this.handlerSmallMovieCardMouseLeave = (evt) => {
+      evt.target.load();
+      clearTimeout(timerId);
+    };
+
+    this.handlerSmallMovieCardMouseLeave = this.handlerSmallMovieCardMouseLeave.bind(this);
   }
 
   render() {
@@ -27,6 +42,7 @@ export default class MoviesList extends Component {
         filmCard={it}
         key={i}
         handlerSmallMovieCardMouseEnter={this.handlerSmallMovieCardMouseEnter}
+        handlerSmallMovieCardMouseLeave={this.handlerSmallMovieCardMouseLeave}
         handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
       />;
     });
