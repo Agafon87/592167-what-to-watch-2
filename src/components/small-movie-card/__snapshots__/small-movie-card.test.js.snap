@@ -4,16 +4,12 @@ exports[`SmallMovieCard correctly renders after test 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onClick={[Function]}
-  onMouseOver={[Function]}
 >
-  <div
-    className="small-movie-card__image"
-  >
-    <img
-      height="175"
-      width="280"
-    />
-  </div>
+  <video
+    height={175}
+    onMouseEnter={[Function]}
+    width={280}
+  />
   <h3
     className="small-movie-card__title"
   >
