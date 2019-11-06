@@ -6,7 +6,7 @@ let timerId;
 
 const startVideo = (elem) => {
   elem.play();
-}
+};
 
 export default class MoviesList extends Component {
   constructor(props) {

@@ -7,7 +7,9 @@ exports[`SmallMovieCard correctly renders after test 1`] = `
 >
   <video
     height={175}
+    muted={true}
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     width={280}
   />
   <h3
