@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer correctly renders after test 1`] = `
+<video
+  height={175}
+  muted={true}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  width={280}
+/>
+`;

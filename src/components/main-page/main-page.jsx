@@ -4,7 +4,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 
 
 const MainPage = (props) => {
-  const {films, onClick} = props;
+  const {films, handlerSmallMovieCardOnClick, onClick} = props;
 
   return <div>
     <section className="movie-card">
@@ -101,7 +101,7 @@ const MainPage = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          <MoviesList films={films}/>
+          <MoviesList films={films} handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}/>
         </div>
 
         <div className="catalog__more">
@@ -128,6 +128,7 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   films: PropTypes.array.isRequired,
+  handlerSmallMovieCardOnClick: PropTypes.func,
   onClick: PropTypes.func
 };
 
