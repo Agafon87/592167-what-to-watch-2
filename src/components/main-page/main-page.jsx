@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
+import GenresItem from "../genres-item/genres-item.jsx";
 
 
 const MainPage = (props) => {
@@ -71,33 +72,7 @@ const MainPage = (props) => {
           <li className="catalog__genres-item catalog__genres-item--active">
             <a href="#" className="catalog__genres-link">All genres</a>
           </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Comedies</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Crime</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Documentary</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Dramas</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Horror</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Kids & Family</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Romance</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Sci-Fi</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">Thrillers</a>
-          </li>
+          <GenresItem films={films}/>
         </ul>
 
         <div className="catalog__movies-list">
