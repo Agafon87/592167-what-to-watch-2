@@ -4,7 +4,7 @@ import MoviePage from "../movie-page/movie-page.jsx";
 
 it(`MovePage correctly renders after test`, () => {
   const tree = renderer
-    .create(<MoviePage />)
+    .create(<MoviePage film={{name: ``}} likeFilms={[]} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
