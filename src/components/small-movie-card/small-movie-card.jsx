@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 
 const SmallMovieCard = (props) => {
-  const {filmCard, handlerSmallMovieCardMouseEnter, handlerSmallMovieCardMouseLeave, handlerSmallMovieCardOnClick} = props;
+  const {
+    filmCard,
+    handlerSmallMovieCardMouseEnter,
+    handlerSmallMovieCardMouseLeave,
+    handlerSmallMovieCardOnClick,
+  } = props;
   return <article
     className="small-movie-card catalog__movies-card"
-    onClick={() => handlerSmallMovieCardOnClick(filmCard.id)}>
+    onClick={() => handlerSmallMovieCardOnClick(filmCard.id)}
+  >
     <VideoPlayer
       className="small-movie-card__image"
       filmCard={filmCard}

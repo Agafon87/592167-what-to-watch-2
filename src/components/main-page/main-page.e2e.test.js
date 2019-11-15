@@ -7,7 +7,7 @@ configure({adapter: new Adapter()});
 
 it(`MainPage correctly e2e test finish`, () => {
   const clickHandler = jest.fn();
-  const mainPage = shallow(<MainPage films={[]} onClick={clickHandler}/>);
+  const mainPage = shallow(<MainPage films={[]} initialFilmsList={[]} onClick={clickHandler}/>);
 
   const playButton = mainPage.find(`.btn--play`);
   playButton.simulate(`click`);

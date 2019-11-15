@@ -1,7 +1,10 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreators} from "../../reducer";
+
 import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
-import PropTypes from "prop-types";
 
 let likeFilms;
 
@@ -10,7 +13,7 @@ const onClick = () => {
 };
 
 const getPageScreen = (props, state, handlerSmallMovieCardOnClick, handlerMoviePageTabClick) => {
-  const {films} = props;
+  const {films, genre, onGenreClick, initialFilmsList} = props;
   const {filmId, filmTab} = state;
   if (filmId >= 0) {
     const filmGenre = films.find((elem) => elem.id === filmId).genre;
@@ -20,8 +23,11 @@ const getPageScreen = (props, state, handlerSmallMovieCardOnClick, handlerMovieP
     case `/`:
       return <MainPage
         films={films}
+        genre={genre}
+        initialFilmsList={initialFilmsList}
         handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
         onClick={onClick}
+        onGenreClick={onGenreClick}
       />;
     case `/films-${filmId}`:
       return <MoviePage
@@ -35,13 +41,19 @@ const getPageScreen = (props, state, handlerSmallMovieCardOnClick, handlerMovieP
   return null;
 };
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       filmId: -1,
       filmTab: `overview`
+    };
+    // eslint-disable-next-line react/prop-types
+    const {onGenreClick, initialFilmsList} = props;
+
+    this.componentDidMount = () => {
+      onGenreClick(initialFilmsList, `All genres`);
     };
 
     this.handlerSmallMovieCardClick = (id) => {
@@ -78,5 +90,24 @@ export default class App extends Component {
 getPageScreen.propTypes = {
   films: PropTypes.array.isRequired,
   state: PropTypes.object,
-  handlerSmallMovieCardClick: PropTypes.func
+  handlerSmallMovieCardClick: PropTypes.func,
+  genre: PropTypes.string,
+  onGenreClick: PropTypes.func,
+  initialFilmsList: PropTypes.array
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  genre: state.genre,
+  films: state.films
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick: (filmsList, genre) => {
+    dispatch(ActionCreators[`CHANGE_GENRE`](genre));
+    dispatch(ActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
+  }
+});
+
+export {App};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -5,7 +5,14 @@ import GenresItem from "../genres-item/genres-item.jsx";
 
 
 const MainPage = (props) => {
-  const {films, handlerSmallMovieCardOnClick, onClick} = props;
+  const {
+    films,
+    genre,
+    initialFilmsList,
+    handlerSmallMovieCardOnClick,
+    onClick,
+    onGenreClick
+  } = props;
 
   return <div>
     <section className="movie-card">
@@ -69,14 +76,18 @@ const MainPage = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <ul className="catalog__genres-list">
-          <li className="catalog__genres-item catalog__genres-item--active">
-            <a href="#" className="catalog__genres-link">All genres</a>
-          </li>
-          <GenresItem films={films}/>
+          <GenresItem
+            films={initialFilmsList}
+            genre={genre}
+            onGenreClick={onGenreClick}
+          />
         </ul>
 
         <div className="catalog__movies-list">
-          <MoviesList films={films} handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}/>
+          <MoviesList
+            films={films}
+            handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
+          />
         </div>
 
         <div className="catalog__more">
@@ -103,8 +114,11 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   films: PropTypes.array.isRequired,
+  genre: PropTypes.string,
+  initialFilmsList: PropTypes.array.isRequired,
   handlerSmallMovieCardOnClick: PropTypes.func,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onGenreClick: PropTypes.func
 };
 
 export default MainPage;

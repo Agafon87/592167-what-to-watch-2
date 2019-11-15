@@ -6,6 +6,7 @@ it(`MainPage correctly renders after relaunch`, () => {
   const tree = renderer
     .create(<MainPage
       films={[]}
+      initialFilmsList={[]}
     />);
 
   expect(tree).toMatchSnapshot();
