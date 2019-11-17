@@ -13,7 +13,6 @@ const ActionCreators = {
   'CHANGE_FILMS_LIST': (filmsList, genre) => {
     const moviesLikeGenre = filmsList.filter((elem) => elem.genre === genre);
     const fullList = genre.toLowerCase() === `all genres`;
-    window.console.log(fullList);
     return {
       type: `CHANGE_FILMS_LIST`,
       payload: (fullList) ? filmsList : moviesLikeGenre
