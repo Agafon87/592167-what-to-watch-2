@@ -16,6 +16,6 @@ CatalogMore.propTypes = {
   films: PropTypes.array,
   filmsCount: PropTypes.number,
   onCatalogMoreClick: PropTypes.func
-}
+};
 
 export default CatalogMore;

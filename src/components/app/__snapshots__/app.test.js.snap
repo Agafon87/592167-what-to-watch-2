@@ -170,10 +170,11 @@ exports[`App correctly renders after relaunch 1`] = `
         className="catalog__movies-list"
       />
       <div
-        className="catalog__more"
+        className="catalog__more invisible-block"
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
