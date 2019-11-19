@@ -154,11 +154,12 @@ exports[`MainPage correctly renders after relaunch 1`] = `
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item"
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             All genres
           </a>
@@ -168,10 +169,11 @@ exports[`MainPage correctly renders after relaunch 1`] = `
         className="catalog__movies-list"
       />
       <div
-        className="catalog__more"
+        className="catalog__more invisible-block"
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
