@@ -4,33 +4,25 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+
+const GenresItemWithActiveItem = withActiveItem(GenresItem);
 
 class MainPage extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      filmsCount: 8
-    };
-
-    this.handlerCatalogMoreClick = () => {
-      this.setState((prevState) => {
-        return {
-          filmsCount: prevState.filmsCount + 20
-        };
-      });
-    };
   }
 
   render() {
-    window.console.log(this.state.filmsCount);
     const {
       films,
       genre,
       initialFilmsList,
-      handlerSmallMovieCardOnClick,
+      handlerSmallMovieCardClick,
       onClick,
-      onGenreClick
+      onGenreClick,
+      onCatalogMoreClick,
+      filmsCount
     } = this.props;
 
     return <div>
@@ -94,26 +86,24 @@ class MainPage extends Component {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <GenresItem
-              films={initialFilmsList}
-              genre={genre}
-              onGenreClick={onGenreClick}
-            />
-          </ul>
+          <GenresItemWithActiveItem
+            films={initialFilmsList}
+            genre={genre}
+            onGenreClick={onGenreClick}
+          />
 
           <div className="catalog__movies-list">
             <MoviesList
               films={films}
-              filmsCount={this.state.filmsCount}
-              handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
+              filmsCount={filmsCount}
+              handlerSmallMovieCardClick={handlerSmallMovieCardClick}
             />
           </div>
 
           <CatalogMore
             films={films}
-            filmsCount={this.state.filmsCount}
-            onCatalogMoreClick={this.handlerCatalogMoreClick}
+            filmsCount={filmsCount}
+            onCatalogMoreClick={onCatalogMoreClick}
           />
         </section>
 
@@ -139,9 +129,11 @@ MainPage.propTypes = {
   films: PropTypes.array.isRequired,
   genre: PropTypes.string,
   initialFilmsList: PropTypes.array.isRequired,
-  handlerSmallMovieCardOnClick: PropTypes.func,
+  handlerSmallMovieCardClick: PropTypes.func,
   onClick: PropTypes.func,
-  onGenreClick: PropTypes.func
+  onGenreClick: PropTypes.func,
+  onCatalogMoreClick: PropTypes.func,
+  filmsCount: PropTypes.number
 };
 
 export default MainPage;

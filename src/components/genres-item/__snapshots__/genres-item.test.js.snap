@@ -1,15 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GenresItem correctly renderer after test 1`] = `
-<li
-  className="catalog__genres-item"
+<ul
+  className="catalog__genres-list"
 >
-  <a
-    className="catalog__genres-link"
-    href="#"
-    onClick={[Function]}
+  <li
+    className="catalog__genres-item "
   >
-    All genres
-  </a>
-</li>
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      All genres
+    </a>
+  </li>
+</ul>
 `;
