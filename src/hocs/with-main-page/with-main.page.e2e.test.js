@@ -5,7 +5,10 @@ import withMainPage from "./with-main-page.jsx";
 
 configure({adapter: new Adapter()});
 
-const MockComponent = <div />;
+const MockComponent = () => {
+  return <div></div>;
+};
+
 const MockComponentWithHoc = withMainPage(MockComponent);
 
 const mock = {
@@ -137,5 +140,5 @@ it(`component reternd with withMainPage hoc`, () => {
 
   const component = mount(<MockComponentWithHoc films={movies}/>);
 
-  expect(component.state().filmCount).toEqual(8);
+  expect(component.state().filmsCount).toEqual(8);
 });
