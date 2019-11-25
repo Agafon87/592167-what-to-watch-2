@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreators} from "../../store/reducer";
+import {ActionCreators} from "../../reducer/data/data.js";
 
 import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -52,11 +52,11 @@ class App extends Component {
     super(props);
 
     // eslint-disable-next-line react/prop-types
-    const {onGenreClick, initialFilmsList} = props;
-
-    this.componentDidMount = () => {
-      onGenreClick(initialFilmsList, `All genres`);
-    };
+    // const {onGenreClick, initialFilmsList} = props;
+    //
+    // this.componentDidMount = () => {
+    //   onGenreClick(initialFilmsList, `All genres`);
+    // };
   }
 
   render() {
