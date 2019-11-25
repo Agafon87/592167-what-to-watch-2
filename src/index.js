@@ -9,7 +9,8 @@ import {reducer} from "./store/reducer";
 import withAppFilmDescription from "./hocs/with-app-film-description/with-app-film-description.jsx";
 import withAppFilm from "./hocs/with-app-film/with-app-film.jsx";
 
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ?
+  window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f);
 const WithAppFilm = withAppFilm(withAppFilmDescription(App));
 
 const init = (films) => {
