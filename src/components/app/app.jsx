@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreators} from "../../reducer/data/data.js";
+import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 
 import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import withMainPage from "../../hocs/with-main-page/with-main-page.jsx";
+import withMoviePageDescription from "../../hocs/with-movie-page-description/with-movie-page-description.jsx";
 
 const WithMainPage = withMainPage(MainPage);
+const WithMoviePageDescription = withMoviePageDescription(MoviePage);
 
 const onClick = () => {
   return;
@@ -19,11 +21,11 @@ const getPageScreen = (props) => {
     genre,
     onGenreClick,
     initialFilmsList,
-    handlerMoviePageTabClick,
+    // handlerMoviePageTabClick,
     filmTab,
     filmId,
     handlerSmallMovieCardClick,
-    likeFilms
+    // likeFilms
   } = props;
   switch (location.pathname) {
     case `/`:
@@ -36,11 +38,13 @@ const getPageScreen = (props) => {
         onGenreClick={onGenreClick}
       />;
     case `/films-${filmId}`:
-      return <MoviePage
+      return <WithMoviePageDescription
+        films={films}
         film={films[filmId - 1]}
         filmTab={filmTab}
-        likeFilms={likeFilms}
-        handlerMoviePageTabClick={handlerMoviePageTabClick}
+        filmId={filmId}
+        // likeFilms={likeFilms}
+        // handlerMoviePageTabClick={handlerMoviePageTabClick}
         handlerSmallMovieCardClick={handlerSmallMovieCardClick}
       />;
   }
@@ -50,21 +54,10 @@ const getPageScreen = (props) => {
 class App extends Component {
   constructor(props) {
     super(props);
-
-    // eslint-disable-next-line react/prop-types
-    // const {onGenreClick, initialFilmsList} = props;
-    //
-    // this.componentDidMount = () => {
-    //   onGenreClick(initialFilmsList, `All genres`);
-    // };
   }
 
   render() {
-    return <React.Fragment>
-      {
-        getPageScreen(this.props)
-      }
-    </React.Fragment>;
+    return getPageScreen(this.props);
   }
 }
 
@@ -75,21 +68,21 @@ getPageScreen.propTypes = {
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
   initialFilmsList: PropTypes.array,
-  handlerMoviePageTabClick: PropTypes.func,
+  // handlerMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string,
   filmId: PropTypes.number,
   likeFilms: PropTypes.array
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  genre: state.genre,
-  films: state.films
+  genre: state[`DATA`].genre,
+  films: state[`DATA`].films
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (filmsList, genre) => {
-    dispatch(ActionCreators[`CHANGE_GENRE`](genre));
-    dispatch(ActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
+    dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
+    dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
   }
 });
 

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 const MAX_COUNT_LIKE_FILMS = 4;
 
-const withAppFilmDescription = (Component) => {
-  class WithApp extends PureComponent {
+const withMoviePageDescription = (Component) => {
+  class WithMoviePageDescription extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -20,7 +20,7 @@ const withAppFilmDescription = (Component) => {
         {...this.props}
         handlerMoviePageTabClick={this.handlerMoviePageTabClick}
         filmTab={this.state.filmTab}
-        likeFilms={this._getLikeFilms(this.props.initialFilmsList, this.props.filmId)}
+        likeFilms={this._getLikeFilms(this.props.films, this.props.filmId)}
       />;
     }
 
@@ -55,12 +55,12 @@ const withAppFilmDescription = (Component) => {
         fourOrLessFilms.slice(0, MAX_COUNT_LIKE_FILMS) : fourOrLessFilms;
     }
   }
-  WithApp.propTypes = {
-    initialFilmsList: PropTypes.array,
+  WithMoviePageDescription.propTypes = {
+    films: PropTypes.array,
     filmId: PropTypes.number
   };
 
-  return WithApp;
+  return WithMoviePageDescription;
 };
 
-export default withAppFilmDescription;
+export default withMoviePageDescription;

@@ -6,9 +6,8 @@ import thunk from "redux-thunk";
 import {compose} from "recompose";
 
 import App from "./components/app/app.jsx";
-// import Films from "./mocks/films.js";
 import reducer from "./reducer/reducer";
-import withAppFilmDescription from "./hocs/with-app-film-description/with-app-film-description.jsx";
+// import withMoviePageDescription from "./hocs/with-movie-page-description/with-movie-page-description.jsx";
 import withAppFilm from "./hocs/with-app-film/with-app-film.jsx";
 import createAPI from "./api";
 import {Operations} from "./reducer/data/data";
@@ -19,12 +18,13 @@ const store = createStore(
     reducer,
     compose(
         applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f)
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
 );
 
 store.dispatch(Operations.loadFilms());
 
-const WithAppFilm = withAppFilm(withAppFilmDescription(App));
+const WithAppFilm = withAppFilm(App);
 
 const init = () => {
   ReactDOM.render(

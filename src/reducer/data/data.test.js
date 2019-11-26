@@ -1,4 +1,4 @@
-import {reducer} from "./reducer.js";
+import {reducer} from "./data.js";
 
 it(`Should return initial state by default`, () => {
   expect(reducer(undefined, {})).toEqual({

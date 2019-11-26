@@ -14,7 +14,7 @@ const StatusCode = {
 const Operations = {
   loadFilms: () => (dispatch, _getState, api) => {
     return api
-      .get(`https://htmlacademy-react-2.appspot.com/wtw/films`)
+      .get(`/films`)
       .then((response) => {
         if (response.status === StatusCode.OK) {
           const films = response.data;
@@ -51,7 +51,7 @@ const ActionCreators = {
 const reducer = (state = initalState, action) => {
   switch (action.type) {
     case `LOAD_FILMS`: return Object.assign({}, state, {
-      films: action.playload
+      films: action.payload
     });
     case `CHANGE_GENRE`: return Object.assign({}, state, {
       genre: action.payload

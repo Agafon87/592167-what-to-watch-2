@@ -4,7 +4,7 @@ const initialState = {
 Object.freeze(initialState);
 
 const ActionCreators = {
-  SET_USER_DATA: (data) => {
+  'SET_USER_DATA': (data) => {
     return {
       type: `SET_USER_DATA`,
       payload: data

@@ -17,7 +17,6 @@ class MainPage extends Component {
     const {
       films,
       genre,
-      initialFilmsList,
       handlerSmallMovieCardClick,
       onClick,
       onGenreClick,
@@ -87,7 +86,7 @@ class MainPage extends Component {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresItemWithActiveItem
-            films={initialFilmsList}
+            films={films}
             genre={genre}
             onGenreClick={onGenreClick}
           />
@@ -128,7 +127,6 @@ class MainPage extends Component {
 MainPage.propTypes = {
   films: PropTypes.array.isRequired,
   genre: PropTypes.string,
-  initialFilmsList: PropTypes.array.isRequired,
   handlerSmallMovieCardClick: PropTypes.func,
   onClick: PropTypes.func,
   onGenreClick: PropTypes.func,
