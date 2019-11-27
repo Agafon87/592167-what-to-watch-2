@@ -10,7 +10,8 @@ import reducer from "./reducer/reducer";
 // import withMoviePageDescription from "./hocs/with-movie-page-description/with-movie-page-description.jsx";
 import withAppFilm from "./hocs/with-app-film/with-app-film.jsx";
 import createAPI from "./api";
-import {Operations} from "./reducer/data/data";
+import {Operation} from "./reducer/data/data";
+import {Operation as UserOperation} from "./reducer/user/user";
 
 const api = createAPI((...args) => store.dispatch(...args));
 
@@ -22,7 +23,9 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operations.loadFilms());
+store.dispatch(Operation.loadFilms());
+store.dispatch(Operation.loadPromo());
+store.dispatch(UserOperation.loginInUser());
 
 const WithAppFilm = withAppFilm(App);
 

@@ -3,6 +3,43 @@ const initialState = {
 };
 Object.freeze(initialState);
 
+const StatusCode = {
+  OK: 200,
+  FORBIDDEN: 403,
+  BAD_REQUEST: 400,
+  INTERNAL_SERVER_ERROR: 500
+};
+
+const Operation = {
+  loginInUser: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/login`)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          dispatch(ActionCreators[`SET_USER_DATA`](response.data));
+        }
+      })
+      .catch((err) => err);
+  },
+  setUserData: (userData, onSuccess, onError) => (dispatch, _getState, api) => {
+    return api
+      .post(`/login`, userData)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          dispatch(ActionCreators[`SET_USER_DATA`](response.data));
+          onSuccess();
+        }
+      })
+      .catch((err) => {
+        const {status} = err.response;
+
+        if (status === StatusCode.FORBIDDEN || status === StatusCode.BAD_REQUEST) {
+          onError();
+        }
+      });
+  }
+};
+
 const ActionCreators = {
   'SET_USER_DATA': (data) => {
     return {
@@ -23,4 +60,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreators};
+export {reducer, ActionCreators, Operation};

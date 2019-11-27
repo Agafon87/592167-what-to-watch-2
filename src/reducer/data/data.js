@@ -1,6 +1,8 @@
 const initalState = {
   genre: ``,
-  films: []
+  films: [],
+  filmPromo: {},
+  isAuthorizationRequired: true
 };
 Object.freeze(initalState);
 
@@ -11,7 +13,7 @@ const StatusCode = {
   INTERNAL_SERVER_ERROR: 500
 };
 
-const Operations = {
+const Operation = {
   loadFilms: () => (dispatch, _getState, api) => {
     return api
       .get(`/films`)
@@ -20,6 +22,17 @@ const Operations = {
           const films = response.data;
 
           dispatch(ActionCreators[`LOAD_FILMS`](films));
+        }
+      });
+  },
+  loadPromo: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/films/promo`)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          const filmPromo = response.data;
+
+          dispatch(ActionCreators[`LOAD_FILM_PROMO`](filmPromo));
         }
       });
   }
@@ -45,6 +58,18 @@ const ActionCreators = {
       type: `CHANGE_FILMS_LIST`,
       payload: (fullList) ? filmsList : moviesLikeGenre
     };
+  },
+  'IS_AUTHORIZATION_REQUIRED': () => {
+    return {
+      type: `IS_AUTHORIZATION_REQUIRED`,
+      payload: false
+    };
+  },
+  'LOAD_FILM_PROMO': (filmPromo) => {
+    return {
+      type: `LOAD_FILM_PROMO`,
+      payload: filmPromo
+    };
   }
 };
 
@@ -59,9 +84,15 @@ const reducer = (state = initalState, action) => {
     case `CHANGE_FILMS_LIST`: return Object.assign({}, state, {
       films: action.payload
     });
+    case `IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload
+    });
+    case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
+      filmPromo: action.payload
+    });
   }
 
   return state;
 };
 
-export {reducer, ActionCreators, Operations};
+export {reducer, ActionCreators, Operation};
