@@ -8,6 +8,7 @@ it(`App correctly renders after relaunch`, () => {
       films={[]}
       initialFilmsList={[]}
       onGenreClick={jest.fn()}
+      userData={{}}
     />)
     .toJSON();
 

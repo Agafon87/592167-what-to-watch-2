@@ -1,8 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
 import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {getFilms, getGenre, getFilmPromo} from "../../reducer/data/data-selectors.js";
+import {getUserData} from "../../reducer/user/user-selectors.js";
 
 import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -29,18 +32,18 @@ const getPageScreen = (props) => {
     isAuthorizationRequired,
     filmTab,
     filmId,
-    filmPromo,
+    // filmPromo,
     handleSmallMovieCardClick,
     userData,
     onAuthUser,
   } = props;
-  window.console.log(userData.name);
-  if (userData.name === undefined) {
-    return <WithSignIn
-      onAuthUser={onAuthUser}
-      userData={userData}
-    />;
-  }
+  // window.console.log(!Object.keys(userData).length);
+  // if (userData.name === undefined) {
+  //   return <WithSignIn
+  //     onAuthUser={onAuthUser}
+  //     userData={userData}
+  //   />;
+  // }
 
   switch (location.pathname) {
     case `/`:
@@ -51,6 +54,8 @@ const getPageScreen = (props) => {
         handleSmallMovieCardClick={handleSmallMovieCardClick}
         onClick={onClick}
         onGenreClick={onGenreClick}
+        isAuthorizationRequired={isAuthorizationRequired}
+        userData={userData}
       />;
     case `/films-${filmId}`:
       return <WithMoviePageDescription
@@ -58,9 +63,12 @@ const getPageScreen = (props) => {
         film={films[filmId - 1]}
         filmTab={filmTab}
         filmId={filmId}
-        // likeFilms={likeFilms}
-        // handleMoviePageTabClick={handleMoviePageTabClick}
         handleSmallMovieCardClick={handleSmallMovieCardClick}
+      />;
+    case `/sign-in`:
+      return <WithSignIn
+        onAuthUser={onAuthUser}
+        userData={userData}
       />;
   }
   return null;
@@ -93,11 +101,11 @@ getPageScreen.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  genre: state[`DATA`].genre,
-  films: state[`DATA`].films,
+  genre: getGenre(state),
+  films: getFilms(state),
   isAuthorizationRequired: state[`DATA`].isAuthorizationRequired,
-  filmPromo: state[`DATA`].filmPromo,
-  userData: state[`USER`].userData
+  filmPromo: getFilmPromo(state),
+  userData: getUserData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

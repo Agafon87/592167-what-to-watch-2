@@ -6,7 +6,7 @@ it(`VideoPlayer correctly renders after test`, () => {
   const tree = renderer
     .create(<VideoPlayer
       filmCard={{}}
-      handlerSmallMovieCardMouseEnter={jest.fn()}
+      handleSmallMovieCardMouseEnter={jest.fn()}
     />)
     .toJSON();
 

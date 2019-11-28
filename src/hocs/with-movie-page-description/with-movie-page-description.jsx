@@ -12,19 +12,19 @@ const withMoviePageDescription = (Component) => {
         filmTab: `overview`
       };
 
-      this.handlerMoviePageTabClick = this.handlerMoviePageTabClick.bind(this);
+      this.handleMoviePageTabClick = this.handleMoviePageTabClick.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
-        handlerMoviePageTabClick={this.handlerMoviePageTabClick}
+        handleMoviePageTabClick={this.handleMoviePageTabClick}
         filmTab={this.state.filmTab}
         likeFilms={this._getLikeFilms(this.props.films, this.props.filmId)}
       />;
     }
 
-    handlerMoviePageTabClick(tabName) {
+    handleMoviePageTabClick(tabName) {
       tabName = tabName.toLowerCase();
       this.setState({
         filmTab: tabName

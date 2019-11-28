@@ -7,6 +7,7 @@ it(`MainPage correctly renders after relaunch`, () => {
     .create(<MainPage
       films={[]}
       initialFilmsList={[]}
+      userData={{}}
     />);
 
   expect(tree).toMatchSnapshot();

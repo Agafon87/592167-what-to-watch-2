@@ -12,28 +12,28 @@ export default class MoviesList extends Component {
   constructor(props) {
     super(props);
 
-    this.handlerSmallMovieCardMouseEnter = (evt) => {
+    this.handleSmallMovieCardMouseEnter = (evt) => {
       const elem = evt.target;
       timerId = setTimeout(() => {
         startVideo(elem);
       }, 1000);
     };
 
-    this.handlerSmallMovieCardMouseEnter = this.handlerSmallMovieCardMouseEnter.bind(this);
+    this.handleSmallMovieCardMouseEnter = this.handleSmallMovieCardMouseEnter.bind(this);
 
-    this.handlerSmallMovieCardMouseLeave = (evt) => {
+    this.handleSmallMovieCardMouseLeave = (evt) => {
       evt.target.load();
       clearTimeout(timerId);
     };
 
-    this.handlerSmallMovieCardMouseLeave = this.handlerSmallMovieCardMouseLeave.bind(this);
+    this.handleSmallMovieCardMouseLeave = this.handleSmallMovieCardMouseLeave.bind(this);
   }
 
   render() {
     const {
       films,
       filmsCount,
-      handlerSmallMovieCardClick
+      handleSmallMovieCardClick
     } = this.props;
 
     const tempFilmsList = (filmsCount < films.length) ? films.slice(0, filmsCount) : films;
@@ -42,9 +42,9 @@ export default class MoviesList extends Component {
       return <SmallMovieCard
         filmCard={it}
         key={i}
-        handlerSmallMovieCardMouseEnter={this.handlerSmallMovieCardMouseEnter}
-        handlerSmallMovieCardMouseLeave={this.handlerSmallMovieCardMouseLeave}
-        handlerSmallMovieCardClick={handlerSmallMovieCardClick}
+        handleSmallMovieCardMouseEnter={this.handleSmallMovieCardMouseEnter}
+        handleSmallMovieCardMouseLeave={this.handleSmallMovieCardMouseLeave}
+        handleSmallMovieCardClick={handleSmallMovieCardClick}
       />;
     });
 
@@ -55,5 +55,5 @@ export default class MoviesList extends Component {
 MoviesList.propTypes = {
   films: PropTypes.array,
   filmsCount: PropTypes.number,
-  handlerSmallMovieCardClick: PropTypes.func
+  handleSmallMovieCardClick: PropTypes.func
 };

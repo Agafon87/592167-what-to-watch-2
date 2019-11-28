@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 
 const SignIn = (props) => {
   const {
-    onSignInClick,
+    // onSignInClick,
     onSetEmail,
     onSetPassword,
     email,

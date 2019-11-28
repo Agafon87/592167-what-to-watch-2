@@ -5,6 +5,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import Header from "../header/header.jsx";
 
 const GenresItemWithActiveItem = withActiveItem(GenresItem);
 
@@ -21,7 +22,9 @@ class MainPage extends Component {
       onClick,
       onGenreClick,
       onCatalogMoreClick,
-      filmsCount
+      filmsCount,
+      isAuthorizationRequired,
+      userData
     } = this.props;
 
     return <div>
@@ -32,21 +35,10 @@ class MainPage extends Component {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
+        <Header
+          isAuthorizationRequired={isAuthorizationRequired}
+          userData={userData}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -131,7 +123,9 @@ MainPage.propTypes = {
   onClick: PropTypes.func,
   onGenreClick: PropTypes.func,
   onCatalogMoreClick: PropTypes.func,
-  filmsCount: PropTypes.number
+  filmsCount: PropTypes.number,
+  isAuthorizationRequired: PropTypes.bool,
+  userData: PropTypes.object,
 };
 
 export default MainPage;
