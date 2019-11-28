@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 const VideoPlayer = (props) => {
   const {filmCard, handlerSmallMovieCardMouseEnter, handlerSmallMovieCardMouseLeave} = props;
   return <video
-    src={filmCard.previewVideoLink}
-    poster={filmCard.previewImage}
+    src={filmCard.preview_video_link}
+    poster={filmCard.preview_image}
     width={280}
     height={175}
     onMouseEnter={(evt) => handlerSmallMovieCardMouseEnter(evt)}

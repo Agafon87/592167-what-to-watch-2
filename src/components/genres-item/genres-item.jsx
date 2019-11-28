@@ -2,37 +2,42 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const GenresItem = (props) => {
-  const {films, genre, onGenreClick} = props;
-  const genreSet = new Set(films.map((it) => it.genre));
-  const genreList = [`All genres`, ...genreSet];
+  const {films, genre, onGenreClick, genreList} = props;
 
-  const genreItems = genreList.map((it, i) => {
-
-    let classNameForGenreItem = `catalog__genres-item`;
-    if (it === genre) {
-      classNameForGenreItem += ` catalog__genres-item--active`;
-    }
-
-    return <li
-      className={classNameForGenreItem}
-      key={i}
-    >
-      <a
-        href="#"
-        className="catalog__genres-link"
-        onClick={() => onGenreClick(films, it)}
-      >{it}
-      </a>
-    </li>;
-  });
-
-  return genreItems;
+  return (
+    <ul className="catalog__genres-list">
+      <li
+        className={`catalog__genres-item ${`All genres` === genre ? `catalog__genres-item--active` : ``}`}
+      >
+        <a
+          href="#"
+          className="catalog__genres-link"
+          onClick={() => onGenreClick(films, `All genres`)}
+        >{`All genres`}
+        </a>
+      </li>
+      {genreList.map((it, i) => {
+        return <li
+          className={`catalog__genres-item ${it === genre ? `catalog__genres-item--active` : ``}`}
+          key={i}
+        >
+          <a
+            href="#"
+            className="catalog__genres-link"
+            onClick={() => onGenreClick(films, it)}
+          >{it}
+          </a>
+        </li>;
+      })}
+    </ul>
+  );
 };
 
 GenresItem.propTypes = {
   films: PropTypes.array,
   genre: PropTypes.string,
-  onGenreClick: PropTypes.func
+  onGenreClick: PropTypes.func,
+  genreList: PropTypes.array
 };
 
 export default GenresItem;

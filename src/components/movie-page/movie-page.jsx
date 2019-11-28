@@ -10,7 +10,7 @@ const MoviePage = (props) => {
     filmTab,
     likeFilms,
     handlerMoviePageTabClick,
-    handlerSmallMovieCardOnClick
+    handlerSmallMovieCardClick
   } = props;
 
   return <React.Fragment>
@@ -68,7 +68,7 @@ const MoviePage = (props) => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src={film.previewImage} alt="The Grand Budapest Hotel poster" width="218"
+            <img src={film.preview_image} alt="The Grand Budapest Hotel poster" width="218"
               height="327"/>
           </div>
 
@@ -90,7 +90,7 @@ const MoviePage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <div className="catalog__movies-list">
-          <MoviesList films={likeFilms} handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}/>
+          <MoviesList films={likeFilms} handlerSmallMovieCardClick={handlerSmallMovieCardClick}/>
         </div>
       </section>
 
@@ -116,7 +116,7 @@ MoviePage.propTypes = {
   handlerMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string,
   likeFilms: PropTypes.array,
-  handlerSmallMovieCardOnClick: PropTypes.func
+  handlerSmallMovieCardClick: PropTypes.func
 };
 
 export default MoviePage;

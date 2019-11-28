@@ -33,7 +33,7 @@ export default class MoviesList extends Component {
     const {
       films,
       filmsCount,
-      handlerSmallMovieCardOnClick
+      handlerSmallMovieCardClick
     } = this.props;
 
     const tempFilmsList = (filmsCount < films.length) ? films.slice(0, filmsCount) : films;
@@ -44,7 +44,7 @@ export default class MoviesList extends Component {
         key={i}
         handlerSmallMovieCardMouseEnter={this.handlerSmallMovieCardMouseEnter}
         handlerSmallMovieCardMouseLeave={this.handlerSmallMovieCardMouseLeave}
-        handlerSmallMovieCardOnClick={handlerSmallMovieCardOnClick}
+        handlerSmallMovieCardClick={handlerSmallMovieCardClick}
       />;
     });
 
@@ -55,5 +55,5 @@ export default class MoviesList extends Component {
 MoviesList.propTypes = {
   films: PropTypes.array,
   filmsCount: PropTypes.number,
-  handlerSmallMovieCardOnClick: PropTypes.func
+  handlerSmallMovieCardClick: PropTypes.func
 };

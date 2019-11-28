@@ -7,11 +7,11 @@ const SmallMovieCard = (props) => {
     filmCard,
     handlerSmallMovieCardMouseEnter,
     handlerSmallMovieCardMouseLeave,
-    handlerSmallMovieCardOnClick,
+    handlerSmallMovieCardClick,
   } = props;
   return <article
     className="small-movie-card catalog__movies-card"
-    onClick={() => handlerSmallMovieCardOnClick(filmCard.id)}
+    onClick={() => handlerSmallMovieCardClick(filmCard.id)}
   >
     <VideoPlayer
       className="small-movie-card__image"
@@ -29,7 +29,7 @@ SmallMovieCard.propTypes = {
   filmCard: PropTypes.object,
   handlerSmallMovieCardMouseEnter: PropTypes.func,
   handlerSmallMovieCardMouseLeave: PropTypes.func,
-  handlerSmallMovieCardOnClick: PropTypes.func
+  handlerSmallMovieCardClick: PropTypes.func
 };
 
 export default SmallMovieCard;

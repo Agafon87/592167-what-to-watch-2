@@ -11,7 +11,7 @@ const MoviePageOverview = (props) => {
       <div className="movie-rating__score">{film.rating}</div>
       <p className="movie-rating__meta">
         <span className="movie-rating__level">Very good</span>
-        <span className="movie-rating__count">{film.scoresCount} ratings</span>
+        <span className="movie-rating__count">{film.scores_count} ratings</span>
       </p>
     </div>
 
