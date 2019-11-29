@@ -20,11 +20,13 @@ const withAppFilm = (Component) => {
       />;
     }
 
-    handleSmallMovieCardClick(id) {
+    handleSmallMovieCardClick(id, history) {
       this.setState({
         filmId: id
       });
-      window.history.pushState(null, null, `films-${id}`);
+      history.push(`/films/${id}`);
+      // window.console.log(history);
+      // window.history.pushState(null, null, `films`);
     }
   }
 

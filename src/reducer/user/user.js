@@ -19,7 +19,10 @@ const Operation = {
           dispatch(ActionCreators[`SET_USER_DATA`](response.data));
         }
       })
-      .catch((err) => err);
+      .catch((err) => {
+        window.console.log(err);
+        return err;
+      });
   },
   setUserData: (userData, onSuccess, onError) => (dispatch, _getState, api) => {
     return api

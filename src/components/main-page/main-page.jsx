@@ -24,7 +24,8 @@ class MainPage extends Component {
       onCatalogMoreClick,
       filmsCount,
       isAuthorizationRequired,
-      userData
+      userData,
+      history
     } = this.props;
 
     return <div>
@@ -88,6 +89,7 @@ class MainPage extends Component {
               films={films}
               filmsCount={filmsCount}
               handleSmallMovieCardClick={handleSmallMovieCardClick}
+              history={history}
             />
           </div>
 

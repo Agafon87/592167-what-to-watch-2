@@ -3,6 +3,7 @@ import Tabs from "../tabs/tabs.jsx";
 import NavigationMoviePageTabs from "../navigation/navigation.jsx";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
+import {Link} from "react-router-dom";
 
 const MoviePage = (props) => {
   const {
@@ -10,7 +11,8 @@ const MoviePage = (props) => {
     filmTab,
     likeFilms,
     handleMoviePageTabClick,
-    handleSmallMovieCardClick
+    handleSmallMovieCardClick,
+    history
   } = props;
 
   return <React.Fragment>
@@ -24,11 +26,11 @@ const MoviePage = (props) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="user-block">
@@ -90,17 +92,21 @@ const MoviePage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <div className="catalog__movies-list">
-          <MoviesList films={likeFilms} handleSmallMovieCardClick={handleSmallMovieCardClick}/>
+          <MoviesList
+            films={likeFilms}
+            handleSmallMovieCardClick={handleSmallMovieCardClick}
+            history={history}
+          />
         </div>
       </section>
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link to="/" className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <div className="copyright">

@@ -1,9 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 const renderUserBlock = (userData) => {
   if (!Object.keys(userData).length) {
-    return <a href="sign-in.html" className="user-block__link">Sign in</a>;
+    return <Link to="/login" className="user-block__link">Sign in</Link>;
   } else {
     const renderAvatar = () => {
       return <div className="user-block__avatar">
@@ -11,15 +12,14 @@ const renderUserBlock = (userData) => {
       </div>;
     };
 
-    return <a>
+    return <Link to="/mylist">
       {renderAvatar()}
-    </a>;
+    </Link>;
   }
 };
 
 const UserBlock = (props) => {
   const {userData} = props;
-  window.console.log(userData);
   return <div className="user-block">
     {renderUserBlock(userData)}
   </div>;

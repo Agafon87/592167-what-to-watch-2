@@ -16,6 +16,7 @@ const withMoviePageDescription = (Component) => {
     }
 
     render() {
+      window.console.log(this.props);
       return <Component
         {...this.props}
         handleMoviePageTabClick={this.handleMoviePageTabClick}

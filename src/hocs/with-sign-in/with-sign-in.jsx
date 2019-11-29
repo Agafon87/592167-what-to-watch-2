@@ -39,10 +39,12 @@ const withSignIn = (Component) => {
     }
 
     _handleFormSubmit() {
-      const {onAuthUser} = this.props;
+      const {onAuthUser, history} = this.props;
       const {email, password} = this.state;
 
-      const handleSuccess = () => {};
+      window.console.log(history.location.search.split(`=`)[1]);
+
+      const handleSuccess = () => history.push(`/`);
       const handleError = () => {};
 
       onAuthUser({email, password}, handleSuccess, handleError);
@@ -52,6 +54,7 @@ const withSignIn = (Component) => {
   WithSignIn.propTypes = {
     onAuthUser: PropTypes.func,
     userData: PropTypes.object,
+    history: PropTypes.object,
   };
 
   return WithSignIn;
