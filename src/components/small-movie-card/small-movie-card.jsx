@@ -10,7 +10,7 @@ const SmallMovieCard = (props) => {
     handleSmallMovieCardMouseEnter,
     handleSmallMovieCardMouseLeave,
     handleSmallMovieCardClick,
-    history
+    history,
   } = props;
   return (
     <article

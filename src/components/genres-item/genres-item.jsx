@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {getFilmsGenres, getGenre} from "../../reducer/data/data-selectors.js";
+import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 
 const GenresItem = (props) => {
-  const {films, genre, onGenreClick, genreList} = props;
+  const {films, genre, onGenreClick, filmsGenre} = props;
 
   return (
     <ul className="catalog__genres-list">
@@ -16,7 +20,7 @@ const GenresItem = (props) => {
         >{`All genres`}
         </a>
       </li>
-      {genreList.map((it, i) => {
+      {filmsGenre.map((it, i) => {
         return <li
           className={`catalog__genres-item ${it === genre ? `catalog__genres-item--active` : ``}`}
           key={i}
@@ -37,7 +41,19 @@ GenresItem.propTypes = {
   films: PropTypes.array,
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
-  genreList: PropTypes.array
+  filmsGenre: PropTypes.array
 };
 
-export default GenresItem;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  filmsGenre: getFilmsGenres(state),
+  genre: getGenre(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick: (filmsList, genre) => {
+    dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
+    dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenresItem);

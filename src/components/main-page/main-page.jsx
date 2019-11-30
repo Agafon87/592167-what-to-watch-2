@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+// import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import Header from "../header/header.jsx";
 
-const GenresItemWithActiveItem = withActiveItem(GenresItem);
+// const GenresItemWithActiveItem = withActiveItem(GenresItem);
 
 class MainPage extends Component {
   constructor(props) {
@@ -78,11 +78,7 @@ class MainPage extends Component {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresItemWithActiveItem
-            films={films}
-            genre={genre}
-            onGenreClick={onGenreClick}
-          />
+          <GenresItem />
 
           <div className="catalog__movies-list">
             <MoviesList
@@ -93,11 +89,11 @@ class MainPage extends Component {
             />
           </div>
 
-          <CatalogMore
-            films={films}
-            filmsCount={filmsCount}
-            onCatalogMoreClick={onCatalogMoreClick}
-          />
+          {/*<CatalogMore*/}
+          {/*  films={films}*/}
+          {/*  filmsCount={filmsCount}*/}
+          {/*  onCatalogMoreClick={onCatalogMoreClick}*/}
+          {/*/>*/}
         </section>
 
         <footer className="page-footer">

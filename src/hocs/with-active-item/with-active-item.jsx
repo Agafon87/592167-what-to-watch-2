@@ -1,5 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilms, getGenre} from "../../reducer/data/data-selectors.js";
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends PureComponent {
@@ -32,4 +34,9 @@ const withActiveItem = (Component) => {
   return WithActiveItem;
 };
 
-export default withActiveItem;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  films: getFilms(state),
+  genre: getGenre(state),
+});
+
+export default connect(mapStateToProps)(withActiveItem);

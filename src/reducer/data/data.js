@@ -1,7 +1,8 @@
 const initalState = {
-  genre: ``,
+  genre: `All genres`,
   films: [],
   filmPromo: {},
+  // likeFilms: [],
   isAuthorizationRequired: true
 };
 Object.freeze(initalState);
@@ -22,6 +23,7 @@ const Operation = {
           const films = response.data;
 
           dispatch(ActionCreators[`LOAD_FILMS`](films));
+          dispatch(ActionCreators[`CHANGE_FILMS_LIST`](films, initalState.genre));
         }
       });
   },
@@ -82,7 +84,7 @@ const reducer = (state = initalState, action) => {
       genre: action.payload
     });
     case `CHANGE_FILMS_LIST`: return Object.assign({}, state, {
-      films: action.payload
+      likeFilms: action.payload
     });
     case `IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload

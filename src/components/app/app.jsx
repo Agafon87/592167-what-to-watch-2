@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
-import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
+// import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {getFilms, getGenre, getFilmPromo} from "../../reducer/data/data-selectors.js";
+import {getFilmsLikeGenre, getGenre, getFilmPromo} from "../../reducer/data/data-selectors.js";
 import {getUserData} from "../../reducer/user/user-selectors.js";
 
 import MainPage from "../main-page/main-page.jsx";
@@ -16,6 +16,7 @@ import MyList from "../my-list/my-list.jsx";
 import withMainPage from "../../hocs/with-main-page/with-main-page.jsx";
 import withMoviePageDescription from "../../hocs/with-movie-page-description/with-movie-page-description.jsx";
 import withSignIn from "../../hocs/with-sign-in/with-sign-in.jsx";
+// import {getLikeFilms} from "../../reducer/data/data-selectors";
 
 const WithMainPage = withMainPage(MainPage);
 const WithMoviePageDescription = withMoviePageDescription(MoviePage);
@@ -40,6 +41,7 @@ class App extends Component {
       handleSmallMovieCardClick,
       userData,
       onAuthUser,
+      // likeFilms,
     } = this.props;
     window.console.log(userData);
     return (
@@ -117,17 +119,14 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   genre: getGenre(state),
-  films: getFilms(state),
+  films: getFilmsLikeGenre(state),
   isAuthorizationRequired: state[`DATA`].isAuthorizationRequired,
   filmPromo: getFilmPromo(state),
   userData: getUserData(state),
+  // likeFilms: getLikeFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreClick: (filmsList, genre) => {
-    dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
-    dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
-  },
   onAuthUser: (userData, onSuccess, onError) => {
     dispatch(UserOperation.setUserData(userData, onSuccess, onError));
   }
