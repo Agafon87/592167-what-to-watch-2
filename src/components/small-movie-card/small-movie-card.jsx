@@ -5,19 +5,19 @@ import VideoPlayer from "../video-player/video-player.jsx";
 const SmallMovieCard = (props) => {
   const {
     filmCard,
-    handlerSmallMovieCardMouseEnter,
-    handlerSmallMovieCardMouseLeave,
-    handlerSmallMovieCardClick,
+    handleSmallMovieCardMouseEnter,
+    handleSmallMovieCardMouseLeave,
+    handleSmallMovieCardClick,
   } = props;
   return <article
     className="small-movie-card catalog__movies-card"
-    onClick={() => handlerSmallMovieCardClick(filmCard.id)}
+    onClick={() => handleSmallMovieCardClick(filmCard.id)}
   >
     <VideoPlayer
       className="small-movie-card__image"
       filmCard={filmCard}
-      handlerSmallMovieCardMouseEnter={handlerSmallMovieCardMouseEnter}
-      handlerSmallMovieCardMouseLeave={handlerSmallMovieCardMouseLeave}
+      handleSmallMovieCardMouseEnter={handleSmallMovieCardMouseEnter}
+      handleSmallMovieCardMouseLeave={handleSmallMovieCardMouseLeave}
     />
     <h3 className="small-movie-card__title">
       <a className="small-movie-card__link" href="movie-page.html">{filmCard.name}</a>
@@ -27,9 +27,9 @@ const SmallMovieCard = (props) => {
 
 SmallMovieCard.propTypes = {
   filmCard: PropTypes.object,
-  handlerSmallMovieCardMouseEnter: PropTypes.func,
-  handlerSmallMovieCardMouseLeave: PropTypes.func,
-  handlerSmallMovieCardClick: PropTypes.func
+  handleSmallMovieCardMouseEnter: PropTypes.func,
+  handleSmallMovieCardMouseLeave: PropTypes.func,
+  handleSmallMovieCardClick: PropTypes.func
 };
 
 export default SmallMovieCard;

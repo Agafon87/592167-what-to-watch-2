@@ -7,7 +7,7 @@ configure({adapter: new Adapter()});
 
 it(`VideoPlayer correctly work after test`, () => {
   const mouseEnter = jest.fn();
-  const videoPlayer = shallow(<VideoPlayer filmCard={{}} handlerSmallMovieCardMouseEnter={mouseEnter}/>);
+  const videoPlayer = shallow(<VideoPlayer filmCard={{}} handleSmallMovieCardMouseEnter={mouseEnter}/>);
 
   const elementVideo = videoPlayer.find(`video`);
   elementVideo.simulate(`mouseenter`);

@@ -9,8 +9,8 @@ const MoviePage = (props) => {
     film,
     filmTab,
     likeFilms,
-    handlerMoviePageTabClick,
-    handlerSmallMovieCardClick
+    handleMoviePageTabClick,
+    handleSmallMovieCardClick
   } = props;
 
   return <React.Fragment>
@@ -75,7 +75,7 @@ const MoviePage = (props) => {
           <div className="movie-card__desc">
             <NavigationMoviePageTabs
               tabItemList={[`Overview`, `Details`, `Reviews`]}
-              handlerMoviePageTabClick={handlerMoviePageTabClick}
+              handleMoviePageTabClick={handleMoviePageTabClick}
               filmTab={filmTab}
             />
 
@@ -90,7 +90,7 @@ const MoviePage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <div className="catalog__movies-list">
-          <MoviesList films={likeFilms} handlerSmallMovieCardClick={handlerSmallMovieCardClick}/>
+          <MoviesList films={likeFilms} handleSmallMovieCardClick={handleSmallMovieCardClick}/>
         </div>
       </section>
 
@@ -113,10 +113,10 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   film: PropTypes.object,
-  handlerMoviePageTabClick: PropTypes.func,
+  handleMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string,
   likeFilms: PropTypes.array,
-  handlerSmallMovieCardClick: PropTypes.func
+  handleSmallMovieCardClick: PropTypes.func
 };
 
 export default MoviePage;

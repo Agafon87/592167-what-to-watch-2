@@ -9,18 +9,18 @@ const withAppFilm = (Component) => {
         filmId: -1
       };
 
-      this.handlerSmallMovieCardClick = this.handlerSmallMovieCardClick.bind(this);
+      this.handleSmallMovieCardClick = this.handleSmallMovieCardClick.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
-        handlerSmallMovieCardClick={this.handlerSmallMovieCardClick}
+        handleSmallMovieCardClick={this.handleSmallMovieCardClick}
         filmId={this.state.filmId}
       />;
     }
 
-    handlerSmallMovieCardClick(id) {
+    handleSmallMovieCardClick(id) {
       this.setState({
         filmId: id
       });

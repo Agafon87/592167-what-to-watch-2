@@ -9,18 +9,18 @@ const withMainPage = (Component) => {
         filmsCount: 8
       };
 
-      this.handlerCatalogMoreClick = this.handlerCatalogMoreClick.bind(this);
+      this.handleCatalogMoreClick = this.handleCatalogMoreClick.bind(this);
     }
 
     render() {
       return <Component
         {...this.props}
-        onCatalogMoreClick={this.handlerCatalogMoreClick}
+        onCatalogMoreClick={this.handleCatalogMoreClick}
         filmsCount={this.state.filmsCount}
       />;
     }
 
-    handlerCatalogMoreClick() {
+    handleCatalogMoreClick() {
       this.setState((prevState) => {
         return {
           filmsCount: prevState.filmsCount + 20

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const NavigationMoviePageTabs = (props) => {
-  const {tabItemList, handlerMoviePageTabClick, filmTab} = props;
+  const {tabItemList, handleMoviePageTabClick, filmTab} = props;
 
   return <React.Fragment>
     <nav className="movie-nav movie-card__nav">
@@ -15,7 +15,7 @@ const NavigationMoviePageTabs = (props) => {
             >
               <a href="#" className="movie-nav__link" onClick={(evt) => {
                 evt.preventDefault();
-                handlerMoviePageTabClick(evt.target.textContent);
+                handleMoviePageTabClick(evt.target.textContent);
               }
               }>{it}</a>
             </li>;
@@ -28,7 +28,7 @@ const NavigationMoviePageTabs = (props) => {
 
 NavigationMoviePageTabs.propTypes = {
   tabItemList: PropTypes.array,
-  handlerMoviePageTabClick: PropTypes.func,
+  handleMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string
 };
 
