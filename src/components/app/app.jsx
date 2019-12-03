@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 
 // import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
@@ -26,6 +26,20 @@ const onClick = () => {
   return;
 };
 
+const PrivateRoute = ({component: Component, data, ...rest}) => {
+  const {isAuth} = rest;
+  return (<Route
+    {...rest}
+    render={props =>
+      isAuth ? (
+        <Component {...props} {...data}/>
+      ) : (
+        <Redirect to={`/login`}/>
+      )
+    }
+  />);
+};
+
 
 class App extends Component {
   render() {
@@ -43,6 +57,9 @@ class App extends Component {
       onAuthUser,
       // likeFilms,
     } = this.props;
+
+    const isAuth = !!Object.keys(userData).length;
+
     window.console.log(userData);
     return (
       <Switch>
@@ -88,13 +105,23 @@ class App extends Component {
             />
           )}
         />
-        <Route path="/mylist" render={({history}) => (
-          <MyList
-            films={films}
-            handleSmallMovieCardClick={handleSmallMovieCardClick}
-            history={history}
-          />
-        )} />
+        <PrivateRoute
+          path="/mylist"
+          isAuth={isAuth}
+          component={MyList}
+          data={{films, handleSmallMovieCardClick, history}}
+        />
+
+        {/*<PrivateRoute*/}
+        {/*  path="/mylist"*/}
+        {/*  isAuth={isAuth}*/}
+        {/*  render={({history}) => (*/}
+        {/*    <MyList*/}
+        {/*      films={films}*/}
+        {/*      handleSmallMovieCardClick={handleSmallMovieCardClick}*/}
+        {/*      history={history}*/}
+        {/*    />*/}
+        {/*  )} />*/}
         <Route path="/films/:id/review" render={() => <h2>This is page with reviews</h2>}/>
       </Switch>
     );

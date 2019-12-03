@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 import MoviesList from "../movies-list/movies-list.jsx";
 
@@ -59,4 +59,4 @@ MyList.propTypes = {
   history: PropTypes.object,
 };
 
-export default MyList;
+export default withRouter(MyList);
