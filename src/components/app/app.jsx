@@ -12,6 +12,7 @@ import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import MyList from "../my-list/my-list.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 import withMainPage from "../../hocs/with-main-page/with-main-page.jsx";
 import withMoviePageDescription from "../../hocs/with-movie-page-description/with-movie-page-description.jsx";
@@ -100,8 +101,6 @@ class App extends Component {
               filmTab={filmTab}
               filmId={filmId}
               handleSmallMovieCardClick={handleSmallMovieCardClick}
-              match={match}
-              history={history}
             />
           )}
         />
@@ -112,17 +111,10 @@ class App extends Component {
           data={{films, handleSmallMovieCardClick, history}}
         />
 
-        {/*<PrivateRoute*/}
-        {/*  path="/mylist"*/}
-        {/*  isAuth={isAuth}*/}
-        {/*  render={({history}) => (*/}
-        {/*    <MyList*/}
-        {/*      films={films}*/}
-        {/*      handleSmallMovieCardClick={handleSmallMovieCardClick}*/}
-        {/*      history={history}*/}
-        {/*    />*/}
-        {/*  )} />*/}
-        <Route path="/films/:id/review" render={() => <h2>This is page with reviews</h2>}/>
+        <Route
+          path="/films/:id/review"
+          component={AddReview}
+        />
       </Switch>
     );
   }

@@ -3,7 +3,7 @@ import Tabs from "../tabs/tabs.jsx";
 import NavigationMoviePageTabs from "../navigation/navigation.jsx";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 const MoviePage = (props) => {
   const {
@@ -12,7 +12,7 @@ const MoviePage = (props) => {
     likeFilms,
     handleMoviePageTabClick,
     handleSmallMovieCardClick,
-    history
+    match
   } = props;
 
   return <React.Fragment>
@@ -61,7 +61,7 @@ const MoviePage = (props) => {
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              <Link to={`/films/${match.params.id}/review`} className="btn movie-card__button">Add review</Link>
             </div>
           </div>
         </div>
@@ -122,7 +122,8 @@ MoviePage.propTypes = {
   handleMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string,
   likeFilms: PropTypes.array,
-  handleSmallMovieCardClick: PropTypes.func
+  handleSmallMovieCardClick: PropTypes.func,
+  match: PropTypes.object,
 };
 
-export default MoviePage;
+export default withRouter(MoviePage);
