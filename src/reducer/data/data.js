@@ -2,8 +2,9 @@ const initalState = {
   genre: `All genres`,
   films: [],
   filmPromo: {},
-  // likeFilms: [],
-  isAuthorizationRequired: true
+  isAuthorizationRequired: true,
+  comments: [],
+  favoriteFilms: [],
 };
 Object.freeze(initalState);
 
@@ -35,6 +36,61 @@ const Operation = {
           const filmPromo = response.data;
 
           dispatch(ActionCreators[`LOAD_FILM_PROMO`](filmPromo));
+        }
+      });
+  },
+  loadComments: (id) => (dispatch, _getState, api) => {
+    return api
+      .get(`/comments/${id}`)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          const comments = response.data;
+
+          dispatch(ActionCreators[`LOAD_COMMENTS`](comments));
+        }
+      });
+  },
+  setComments: (commentData, id, onSuccess, onError) => (dispatch, _getState, api) => {
+    return api
+      .post(`/comments/${id}`, commentData)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          const comments = response.data;
+          dispatch(ActionCreators[`LOAD_COMMENTS`](comments));
+          onSuccess();
+        }
+      })
+      .catch((err) => {
+        const {status} = err.response;
+
+        if (status === StatusCode.FORBIDDEN || status === StatusCode.BAD_REQUEST) {
+          onError();
+        }
+      });
+  },
+  loadFavorite: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/favorite`)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          const favorites = response.data;
+          dispatch(ActionCreators[`LOAD_FAVORITE_FILMS`](favorites));
+        }
+      });
+  },
+  setFavorite: (id, status, onError) => (dispatch, _getState, api) => {
+    return api
+      .post(`/favorite/${id}/${status}`)
+      .then((response) => {
+        if (response.status === StatusCode.OK) {
+          const film = response.data;
+          dispatch(ActionCreators[`REMOVE_FAVORITE`](film));
+          dispatch(ActionCreators[`UPDATE_FAVORITE`](film));
+        }
+      })
+      .catch((err) => {
+        if (err.status === StatusCode.FORBIDDEN || err.status === StatusCode.BAD_REQUEST) {
+          onError();
         }
       });
   }
@@ -72,6 +128,36 @@ const ActionCreators = {
       type: `LOAD_FILM_PROMO`,
       payload: filmPromo
     };
+  },
+  'LOAD_COMMENTS': (comments) => {
+    return {
+      type: `LOAD_COMMENTS`,
+      payload: comments
+    };
+  },
+  'CLEAN_COMMENTS': () => {
+    return {
+      type: `CLEAN_COMMENTS`,
+      payload: []
+    };
+  },
+  'LOAD_FAVORITE_FILMS': (films) => {
+    return {
+      type: `LOAD_FAVORITE_FILMS`,
+      payload: films
+    };
+  },
+  'REMOVE_FAVORITE': (film) => {
+    return {
+      type: `REMOVE_FAVORITE`,
+      payload: film
+    };
+  },
+  'UPDATE_FAVORITE': (film) => {
+    return {
+      type: `UPDATE_FAVORITE`,
+      payload: film
+    };
   }
 };
 
@@ -91,6 +177,21 @@ const reducer = (state = initalState, action) => {
     });
     case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
       filmPromo: action.payload
+    });
+    case `LOAD_COMMENTS`: return Object.assign({}, state, {
+      comments: action.payload
+    });
+    case `CLEAN_COMMENTS`: return Object.assign({}, state, {
+      comments: action.payload
+    });
+    case `LOAD_FAVORITE_FILMS`: return Object.assign({}, state, {
+      favoriteFilms: action.payload
+    });
+    case `REMOVE_FAVORITE`:
+      const favoriteFilms = state.favoriteFilms.filter((it) => it.id !== action.payload.id);
+      return Object.assign({}, state, {favoriteFilms});
+    case `UPDATE_FAVORITE`: Object.assign({}, state, {
+      favoriteFilms: state.favoriteFilms.concat(action.payload)
     });
   }
 

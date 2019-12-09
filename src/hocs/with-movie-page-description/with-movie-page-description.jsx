@@ -1,5 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilmsLikeGenre} from "../../reducer/data/data-selectors.js";
 
 const MAX_COUNT_LIKE_FILMS = 4;
 
@@ -8,21 +10,41 @@ const withMoviePageDescription = (Component) => {
     constructor(props) {
       super(props);
 
+      const {match} = this.props;
+
+      const film = this._getFilmById(parseInt(match.params.id, 10));
+      const likeFilms = this._getLikeFilms(film);
+
       this.state = {
-        filmTab: `overview`
+        filmTab: `overview`,
+        film,
+        likeFilms,
       };
 
       this.handleMoviePageTabClick = this.handleMoviePageTabClick.bind(this);
+      this._handleSetToFavorites = this._handleSetToFavorites.bind(this);
     }
 
     render() {
-      window.console.log(this.props);
       return <Component
         {...this.props}
         handleMoviePageTabClick={this.handleMoviePageTabClick}
         filmTab={this.state.filmTab}
-        likeFilms={this._getLikeFilms(this.props.films, this.props.filmId)}
+        likeFilms={this.state.likeFilms}
+        film={this.state.film}
+        onSetToFavorites={this._handleSetToFavorites}
       />;
+    }
+
+    componentDidUpdate(prevProps) {
+      const {films, match} = this.props;
+
+      if (!prevProps.films.length && films.length || prevProps.match.params.id !== match.params.id) {
+        const film = this._getFilmById(parseInt(match.params.id, 10));
+        const likeFilms = this._getLikeFilms(film);
+
+        this.setState({film, likeFilms});
+      }
     }
 
     handleMoviePageTabClick(tabName) {
@@ -32,36 +54,47 @@ const withMoviePageDescription = (Component) => {
       });
     }
 
-    _getLikeFilms(films, filmId) {
-      let likeFilms = [];
+    _getFilmById(id) {
+      const {films} = this.props;
 
-      if (filmId >= 0) {
-        const filmGenre = films.find((elem) => elem.id === filmId).genre;
-        likeFilms = films.filter((elem) => elem.genre === filmGenre);
-      }
-
-      return this._getNotMoreThanFourLikeFilms(likeFilms, filmId);
+      return films.find((it) => it.id === id) || {};
     }
 
-    _getNotMoreThanFourLikeFilms(arr, id) {
-      let fourOrLessFilms = [];
-      if (arr.length > 1) {
-        const idx = arr.findIndex((elem) => elem.id === id);
-        const before = arr.slice(0, idx);
-        const after = arr.slice(idx + 1);
-        fourOrLessFilms = [...before, ...after];
-      }
+    _getLikeFilms(film) {
+      const {films} = this.props;
 
-      return fourOrLessFilms.length > MAX_COUNT_LIKE_FILMS ?
-        fourOrLessFilms.slice(0, MAX_COUNT_LIKE_FILMS) : fourOrLessFilms;
+      return films
+        .filter((it) => it.genre === film.genre && it.name !== film.name)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, MAX_COUNT_LIKE_FILMS);
+    }
+
+    _handleSetToFavorites() {
+      const {onChangeFavoriteList} = this.props;
+      const {film} = this.state;
+      const status = +!film.is_favorite;
+
+      onChangeFavoriteList(film.id, status, this._handleFavoriteListError);
+    }
+
+    _handleFavoriteListError() {
+      const {history} = this.props;
+      const {film} = this.state;
+      history.push(`/login?redirect=/film/${film.id}`);
     }
   }
   WithMoviePageDescription.propTypes = {
     films: PropTypes.array,
-    filmId: PropTypes.number
+    match: PropTypes.object,
+    history: PropTypes.object,
+    onChangeFavoriteList: PropTypes.func,
   };
 
-  return WithMoviePageDescription;
+  return connect(mapStateToProps)(WithMoviePageDescription);
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  tempFilms: getFilmsLikeGenre(state),
+});
 
 export default withMoviePageDescription;

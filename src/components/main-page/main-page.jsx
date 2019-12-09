@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
-// import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import Header from "../header/header.jsx";
 
 // const GenresItemWithActiveItem = withActiveItem(GenresItem);
@@ -17,21 +16,21 @@ class MainPage extends Component {
   render() {
     const {
       films,
-      genre,
-      handleSmallMovieCardClick,
-      onClick,
-      onGenreClick,
+      film,
+      // handleSmallMovieCardClick,
+      // onClick,
+      onSwitchPlayer,
       onCatalogMoreClick,
       filmsCount,
       isAuthorizationRequired,
       userData,
-      history
+      onSetToFavorites,
     } = this.props;
 
     return <div>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={film.background_image} alt={film.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -39,32 +38,41 @@ class MainPage extends Component {
         <Header
           isAuthorizationRequired={isAuthorizationRequired}
           userData={userData}
+          isMainPage={true}
         />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img src={film.poster_image} alt={film.name} width="218"
                 height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{film.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{film.genre}</span>
+                <span className="movie-card__year">{film.released}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={onClick}>
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick={onSwitchPlayer}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={onSetToFavorites}
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    {film.is_favorite ? (<use xlinkHref="#in-list"></use>) : <use xlinkHref="#add"></use>}
                   </svg>
                   <span>My list</span>
                 </button>
@@ -84,16 +92,14 @@ class MainPage extends Component {
             <MoviesList
               films={films}
               filmsCount={filmsCount}
-              handleSmallMovieCardClick={handleSmallMovieCardClick}
-              history={history}
             />
           </div>
 
-          {/*<CatalogMore*/}
-          {/*  films={films}*/}
-          {/*  filmsCount={filmsCount}*/}
-          {/*  onCatalogMoreClick={onCatalogMoreClick}*/}
-          {/*/>*/}
+          <CatalogMore
+            films={films}
+            filmsCount={filmsCount}
+            onCatalogMoreClick={onCatalogMoreClick}
+          />
         </section>
 
         <footer className="page-footer">
@@ -124,6 +130,10 @@ MainPage.propTypes = {
   filmsCount: PropTypes.number,
   isAuthorizationRequired: PropTypes.bool,
   userData: PropTypes.object,
+  history: PropTypes.object,
+  film: PropTypes.object,
+  onSwitchPlayer: PropTypes.func,
+  onSetToFavorites: PropTypes.func,
 };
 
 export default MainPage;

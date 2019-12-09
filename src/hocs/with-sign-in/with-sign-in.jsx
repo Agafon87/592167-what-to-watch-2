@@ -42,8 +42,6 @@ const withSignIn = (Component) => {
       const {onAuthUser, history} = this.props;
       const {email, password} = this.state;
 
-      window.console.log(history.location.search.split(`=`)[1]);
-
       const handleSuccess = () => history.push(`/`);
       const handleError = () => {};
 

@@ -20,7 +20,6 @@ const Operation = {
         }
       })
       .catch((err) => {
-        window.console.log(err);
         return err;
       });
   },

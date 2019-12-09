@@ -69,7 +69,6 @@ const SignIn = (props) => {
             className="sign-in__btn"
             type="submit"
             disabled={!email.length || !password.length}
-            // onClick={() => onSignInClick()}
           >Sign in</button>
         </div>
       </form>

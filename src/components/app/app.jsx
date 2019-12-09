@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route, Redirect} from "react-router-dom";
 
-// import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getFilmsLikeGenre, getGenre, getFilmPromo} from "../../reducer/data/data-selectors.js";
 import {getUserData} from "../../reducer/user/user-selectors.js";
 
@@ -17,16 +17,17 @@ import AddReview from "../add-review/add-review.jsx";
 import withMainPage from "../../hocs/with-main-page/with-main-page.jsx";
 import withMoviePageDescription from "../../hocs/with-movie-page-description/with-movie-page-description.jsx";
 import withSignIn from "../../hocs/with-sign-in/with-sign-in.jsx";
-// import {getLikeFilms} from "../../reducer/data/data-selectors";
+import withAddReview from "../../hocs/with-add-review/with-add-review.jsx";
+import withPlayerActive from "../../hocs/with-player-active/with-player-active.jsx";
+import withMyList from "../../hocs/with-my-list/with-my-list.jsx";
 
-const WithMainPage = withMainPage(MainPage);
-const WithMoviePageDescription = withMoviePageDescription(MoviePage);
 const WithSignIn = withSignIn(SignIn);
+const WithAddReview = withAddReview(AddReview);
+const WithMyList = withMyList(MyList);
+const MainPageWithPlayerActive = withPlayerActive(withMainPage(MainPage));
+const MoviePageWithPlayerActive = withMoviePageDescription(withPlayerActive(MoviePage));
 
-const onClick = () => {
-  return;
-};
-
+/* eslint-disable no-param-reassign */
 const PrivateRoute = ({component: Component, data, ...rest}) => {
   const {isAuth} = rest;
   return (<Route
@@ -51,33 +52,35 @@ class App extends Component {
       initialFilmsList,
       isAuthorizationRequired,
       filmTab,
-      filmId,
-      // filmPromo,
+      filmPromo,
       handleSmallMovieCardClick,
       userData,
       onAuthUser,
-      // likeFilms,
+      filmId,
+      onChangeFavoriteList,
     } = this.props;
 
     const isAuth = !!Object.keys(userData).length;
 
-    window.console.log(userData);
     return (
       <Switch>
         <Route
           path="/"
           exact
-          render={({history}) => (
-            <WithMainPage
+          render={({history, match}) => (
+            <MainPageWithPlayerActive
               films={films}
               genre={genre}
               initialFilmsList={initialFilmsList}
               handleSmallMovieCardClick={handleSmallMovieCardClick}
-              onClick={onClick}
+              // onClick={onClick}
               onGenreClick={onGenreClick}
               isAuthorizationRequired={isAuthorizationRequired}
               userData={userData}
+              film={filmPromo}
               history={history}
+              match={match}
+              onChangeFavoriteList={onChangeFavoriteList}
             />
           )}
         />
@@ -94,26 +97,33 @@ class App extends Component {
         <Route
           path="/films/:id"
           exact
-          render={(match, history) => (
-            <WithMoviePageDescription
+          render={({match, history}) => (
+            <MoviePageWithPlayerActive
               films={films}
-              film={films[1]}
-              filmTab={filmTab}
               filmId={filmId}
+              filmTab={filmTab}
+              genre={genre}
               handleSmallMovieCardClick={handleSmallMovieCardClick}
+              isAuthorizationRequired={isAuthorizationRequired}
+              userData={userData}
+              match={match}
+              history={history}
+              onChangeFavoriteList={onChangeFavoriteList}
             />
           )}
         />
         <PrivateRoute
           path="/mylist"
+          exac
           isAuth={isAuth}
-          component={MyList}
-          data={{films, handleSmallMovieCardClick, history}}
+          component={WithMyList}
+          data={{handleSmallMovieCardClick}}
         />
-
-        <Route
+        <PrivateRoute
           path="/films/:id/review"
-          component={AddReview}
+          isAuth={isAuth}
+          component={WithAddReview}
+          data={{isAuthorizationRequired, userData}}
         />
       </Switch>
     );
@@ -129,11 +139,12 @@ App.propTypes = {
   initialFilmsList: PropTypes.array,
   filmPromo: PropTypes.object,
   filmTab: PropTypes.string,
-  filmId: PropTypes.number,
   likeFilms: PropTypes.array,
   isAuthorizationRequired: PropTypes.bool,
   userData: PropTypes.object,
   onAuthUser: PropTypes.func,
+  filmId: PropTypes.number,
+  onChangeFavoriteList: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -148,6 +159,9 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   onAuthUser: (userData, onSuccess, onError) => {
     dispatch(UserOperation.setUserData(userData, onSuccess, onError));
+  },
+  onChangeFavoriteList: (id, status, onError) => {
+    dispatch(DataOperation.setFavorite(id, status, onError));
   }
 });
 

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {getRating} from "../../utils.js";
+
 const MoviePageOverview = (props) => {
   const {film} = props;
   let starring = film.starring.map((it) => it).join(`, `);
@@ -10,7 +12,7 @@ const MoviePageOverview = (props) => {
     <div className="movie-rating">
       <div className="movie-rating__score">{film.rating}</div>
       <p className="movie-rating__meta">
-        <span className="movie-rating__level">Very good</span>
+        <span className="movie-rating__level">{getRating(film.rating)}</span>
         <span className="movie-rating__count">{film.scores_count} ratings</span>
       </p>
     </div>
