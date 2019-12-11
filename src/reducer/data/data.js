@@ -117,12 +117,12 @@ const ActionCreators = {
       payload: (fullList) ? filmsList : moviesLikeGenre
     };
   },
-  'IS_AUTHORIZATION_REQUIRED': () => {
-    return {
-      type: `IS_AUTHORIZATION_REQUIRED`,
-      payload: false
-    };
-  },
+  // 'IS_AUTHORIZATION_REQUIRED': () => {
+  //   return {
+  //     type: `IS_AUTHORIZATION_REQUIRED`,
+  //     payload: false
+  //   };
+  // },
   'LOAD_FILM_PROMO': (filmPromo) => {
     return {
       type: `LOAD_FILM_PROMO`,
@@ -154,6 +154,7 @@ const ActionCreators = {
     };
   },
   'UPDATE_FAVORITE': (film) => {
+    // const favoriteFilms = this.state.favoriteFilms.concat(action.payload)
     return {
       type: `UPDATE_FAVORITE`,
       payload: film
@@ -172,9 +173,9 @@ const reducer = (state = initalState, action) => {
     case `CHANGE_FILMS_LIST`: return Object.assign({}, state, {
       likeFilms: action.payload
     });
-    case `IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
-      isAuthorizationRequired: action.payload
-    });
+    // case `IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
+    //   isAuthorizationRequired: action.payload
+    // });
     case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
       filmPromo: action.payload
     });

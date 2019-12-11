@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App correctly renders after relaunch 1`] = `
+exports[`App component renders correctly 1`] = `
 <div>
   <section
     className="movie-card"
@@ -9,8 +9,7 @@ exports[`App correctly renders after relaunch 1`] = `
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Авиатор"
       />
     </div>
     <h1
@@ -49,7 +48,8 @@ exports[`App correctly renders after relaunch 1`] = `
       >
         <a
           className="user-block__link"
-          href="sign-in.html"
+          href="/login"
+          onClick={[Function]}
         >
           Sign in
         </a>
@@ -65,9 +65,8 @@ exports[`App correctly renders after relaunch 1`] = `
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Авиатор"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -77,7 +76,7 @@ exports[`App correctly renders after relaunch 1`] = `
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Авиатор
           </h2>
           <p
             className="movie-card__meta"
@@ -85,12 +84,12 @@ exports[`App correctly renders after relaunch 1`] = `
             <span
               className="movie-card__genre"
             >
-              Drama
+              Dramas
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2004
             </span>
           </p>
           <div
@@ -116,6 +115,7 @@ exports[`App correctly renders after relaunch 1`] = `
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -161,10 +161,126 @@ exports[`App correctly renders after relaunch 1`] = `
             All genres
           </a>
         </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            All genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Thrillers
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Horror
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Romance
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Comedies
+          </a>
+        </li>
       </ul>
       <div
         className="catalog__movies-list"
-      />
+      >
+        <div
+          className="catalog__movies-list"
+        >
+          <article
+            className="small-movie-card catalog__movies-card"
+            onMouseEnter={null}
+          >
+            <a
+              href="/films/1"
+              onClick={[Function]}
+            >
+              <video
+                className=""
+                height="175"
+                width="280"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </a>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="/films/1"
+                onClick={[Function]}
+              >
+                Фантастические твари: Преступления Грин-де-Вальда
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
+            onMouseEnter={null}
+          >
+            <a
+              href="/films/2"
+              onClick={[Function]}
+            >
+              <video
+                className=""
+                height="175"
+                width="280"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </a>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="/films/2"
+                onClick={[Function]}
+              >
+                Богемская рапсодия
+              </a>
+            </h3>
+          </article>
+        </div>
+      </div>
       <div
         className="catalog__more invisible-block"
       >

@@ -20,8 +20,6 @@ const MoviesList = (props) => {
 MoviesList.propTypes = {
   films: PropTypes.array,
   filmsCount: PropTypes.number,
-  // handleSmallMovieCardClick: PropTypes.func,
-  // history: PropTypes.object
 };
 
 export default MoviesList;

@@ -40,11 +40,6 @@ class SmallMovieCard extends PureComponent {
   }
 
   componentWillUnmount() {
-    // const card = this._cardRef.current;
-
-    // card.onmouseenter = null;
-    // card.onmouseleave = null;
-
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }

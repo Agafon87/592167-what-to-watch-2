@@ -72,8 +72,8 @@ class VideoPlayer extends PureComponent {
 
 VideoPlayer.propTypes = {
   className: PropTypes.string,
-  image: PropTypes.string.isRequired,
-  video: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  video: PropTypes.string,
   isPlaying: PropTypes.bool.isRequired,
   isFull: PropTypes.bool.isRequired,
   size: PropTypes.shape({

@@ -1,9 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 
 import Header from "../header/header.jsx";
-import {getFilms} from "../../reducer/data/data-selectors.js";
 
 class AddReview extends PureComponent {
   render() {
@@ -98,11 +96,6 @@ class AddReview extends PureComponent {
   }
 }
 
-// const AddReview = (props) => {
-//   const {isAuthorizationRequired, userData} = props;
-//
-//
-// };
 
 AddReview.propTypes = {
   isAuthorizationRequired: PropTypes.bool,
@@ -115,9 +108,5 @@ AddReview.propTypes = {
   isButtonDisabled: PropTypes.bool,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  films: getFilms(state)
-});
-
-export default connect(mapStateToProps)(AddReview);
+export default AddReview;
 

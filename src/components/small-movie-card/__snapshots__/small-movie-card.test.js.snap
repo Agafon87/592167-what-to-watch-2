@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SmallMovieCard correctly renders after test 1`] = `
+exports[`SmallMovieCard component renders correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  onClick={[Function]}
+  onMouseEnter={[Function]}
 >
-  <video
-    height={175}
-    muted={true}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    width={280}
+  <a
+    href="/films/4"
+    onClick={[Function]}
   />
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
-    />
+      href="/films/4"
+      onClick={[Function]}
+    >
+      Авиатор
+    </a>
   </h3>
 </article>
 `;

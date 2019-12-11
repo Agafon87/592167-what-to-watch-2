@@ -20,6 +20,8 @@ import withSignIn from "../../hocs/with-sign-in/with-sign-in.jsx";
 import withAddReview from "../../hocs/with-add-review/with-add-review.jsx";
 import withPlayerActive from "../../hocs/with-player-active/with-player-active.jsx";
 import withMyList from "../../hocs/with-my-list/with-my-list.jsx";
+import {ActionCreators as DataActionCreators, Operation} from "../../reducer/data/data";
+import {getComments, getFilmsGenres} from "../../reducer/data/data-selectors";
 
 const WithSignIn = withSignIn(SignIn);
 const WithAddReview = withAddReview(AddReview);
@@ -27,12 +29,12 @@ const WithMyList = withMyList(MyList);
 const MainPageWithPlayerActive = withPlayerActive(withMainPage(MainPage));
 const MoviePageWithPlayerActive = withMoviePageDescription(withPlayerActive(MoviePage));
 
-/* eslint-disable no-param-reassign */
+// eslint-disable-next-line no-shadow,react/prop-types
 const PrivateRoute = ({component: Component, data, ...rest}) => {
   const {isAuth} = rest;
   return (<Route
     {...rest}
-    render={props =>
+    render={(props) =>
       isAuth ? (
         <Component {...props} {...data}/>
       ) : (
@@ -47,17 +49,20 @@ class App extends Component {
   render() {
     const {
       films,
-      genre,
-      onGenreClick,
-      initialFilmsList,
-      isAuthorizationRequired,
-      filmTab,
       filmPromo,
-      handleSmallMovieCardClick,
+      genre,
+      filmTab,
       userData,
-      onAuthUser,
       filmId,
+      onGenreClick,
+      isAuthorizationRequired,
+      handleSmallMovieCardClick,
+      onAuthUser,
       onChangeFavoriteList,
+      filmsGenre,
+      comments,
+      onLoadComments,
+      onCleanComments,
     } = this.props;
 
     const isAuth = !!Object.keys(userData).length;
@@ -71,10 +76,9 @@ class App extends Component {
             <MainPageWithPlayerActive
               films={films}
               genre={genre}
-              initialFilmsList={initialFilmsList}
               handleSmallMovieCardClick={handleSmallMovieCardClick}
-              // onClick={onClick}
               onGenreClick={onGenreClick}
+              filmsGenre={filmsGenre}
               isAuthorizationRequired={isAuthorizationRequired}
               userData={userData}
               film={filmPromo}
@@ -109,6 +113,9 @@ class App extends Component {
               match={match}
               history={history}
               onChangeFavoriteList={onChangeFavoriteList}
+              comments={comments}
+              onLoadComments={onLoadComments}
+              onCleanComments={onCleanComments}
             />
           )}
         />
@@ -123,7 +130,7 @@ class App extends Component {
           path="/films/:id/review"
           isAuth={isAuth}
           component={WithAddReview}
-          data={{isAuthorizationRequired, userData}}
+          data={{films, isAuthorizationRequired, userData}}
         />
       </Switch>
     );
@@ -136,7 +143,6 @@ App.propTypes = {
   handleSmallMovieCardClick: PropTypes.func,
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
-  initialFilmsList: PropTypes.array,
   filmPromo: PropTypes.object,
   filmTab: PropTypes.string,
   likeFilms: PropTypes.array,
@@ -145,6 +151,10 @@ App.propTypes = {
   onAuthUser: PropTypes.func,
   filmId: PropTypes.number,
   onChangeFavoriteList: PropTypes.func,
+  filmsGenre: PropTypes.array,
+  comments: PropTypes.array,
+  onLoadComments: PropTypes.func,
+  onCleanComments: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -153,7 +163,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isAuthorizationRequired: state[`DATA`].isAuthorizationRequired,
   filmPromo: getFilmPromo(state),
   userData: getUserData(state),
-  // likeFilms: getLikeFilms(state),
+  filmsGenre: getFilmsGenres(state),
+  comments: getComments(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -162,6 +173,16 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onChangeFavoriteList: (id, status, onError) => {
     dispatch(DataOperation.setFavorite(id, status, onError));
+  },
+  onGenreClick: (filmsList, genre) => {
+    dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
+    dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
+  },
+  onLoadComments: (id) => {
+    dispatch(Operation.loadComments(id));
+  },
+  onCleanComments: () => {
+    dispatch(DataActionCreators[`CLEAN_COMMENTS`]());
   }
 });
 

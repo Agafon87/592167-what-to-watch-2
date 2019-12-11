@@ -1,9 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 
-import {getComments} from "../../reducer/data/data-selectors.js";
-import {ActionCreators, Operation} from "../../reducer/data/data.js";
 import {getNewDate} from "../../utils.js";
 
 class MoviePageReviews extends PureComponent {
@@ -83,17 +80,5 @@ MoviePageReviews.propTypes = {
   onCleanComments: PropTypes.func,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  comments: getComments(state)
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  onLoadComments: (id) => {
-    dispatch(Operation.loadComments(id));
-  },
-  onCleanComments: () => {
-    dispatch(ActionCreators[`CLEAN_COMMENTS`]());
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePageReviews);
+export default MoviePageReviews;

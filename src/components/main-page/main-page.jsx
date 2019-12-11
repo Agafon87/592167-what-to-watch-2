@@ -6,8 +6,6 @@ import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
 import Header from "../header/header.jsx";
 
-// const GenresItemWithActiveItem = withActiveItem(GenresItem);
-
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -17,14 +15,15 @@ class MainPage extends Component {
     const {
       films,
       film,
-      // handleSmallMovieCardClick,
-      // onClick,
       onSwitchPlayer,
       onCatalogMoreClick,
       filmsCount,
       isAuthorizationRequired,
       userData,
       onSetToFavorites,
+      onGenreClick,
+      filmsGenre,
+      genre
     } = this.props;
 
     return <div>
@@ -86,7 +85,11 @@ class MainPage extends Component {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresItem />
+          <GenresItem
+            onGenreClick={onGenreClick}
+            filmsGenre={filmsGenre}
+            genre={genre}
+          />
 
           <div className="catalog__movies-list">
             <MoviesList
@@ -124,7 +127,6 @@ MainPage.propTypes = {
   films: PropTypes.array.isRequired,
   genre: PropTypes.string,
   handleSmallMovieCardClick: PropTypes.func,
-  onClick: PropTypes.func,
   onGenreClick: PropTypes.func,
   onCatalogMoreClick: PropTypes.func,
   filmsCount: PropTypes.number,
@@ -134,6 +136,7 @@ MainPage.propTypes = {
   film: PropTypes.object,
   onSwitchPlayer: PropTypes.func,
   onSetToFavorites: PropTypes.func,
+  filmsGenre: PropTypes.array,
 };
 
 export default MainPage;

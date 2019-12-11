@@ -1,9 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-
-import {getFilmsGenres, getGenre} from "../../reducer/data/data-selectors.js";
-import {ActionCreators as DataActionCreators} from "../../reducer/data/data.js";
 
 const GenresItem = (props) => {
   const {films, genre, onGenreClick, filmsGenre} = props;
@@ -44,16 +40,4 @@ GenresItem.propTypes = {
   filmsGenre: PropTypes.array
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  filmsGenre: getFilmsGenres(state),
-  genre: getGenre(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreClick: (filmsList, genre) => {
-    dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
-    dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(GenresItem);
+export default GenresItem;

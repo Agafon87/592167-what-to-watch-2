@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CatalogMore correctly renderer after test 1`] = `
+exports[`CatalogMore component renders correctly 1`] = `
 <div
-  className="catalog__more invisible-block"
+  className="catalog__more"
 >
   <button
     className="catalog__button"

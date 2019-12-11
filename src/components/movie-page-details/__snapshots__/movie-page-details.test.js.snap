@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviePageDetails correctly renders after test 1`] = `
+exports[`MoviePageDetails component renders correctly 1`] = `
 <div
   className="movie-card__text movie-card__row"
 >
@@ -17,7 +17,9 @@ exports[`MoviePageDetails correctly renders after test 1`] = `
       </strong>
       <span
         className="movie-card__details-value"
-      />
+      >
+        Мартин Скорсезе
+      </span>
     </p>
     <p
       className="movie-card__details-item"
@@ -30,7 +32,7 @@ exports[`MoviePageDetails correctly renders after test 1`] = `
       <span
         className="movie-card__details-value"
       >
-        
+        Леонардо ДиКаприо, Кейт Бланшетт, Мэтт Росс, Джон Си Райли, Алан Алда, Кейт Бекинсейл, Алек Болдуин, Иэн Холм, Адам Скотт, Дэнни Хьюстон
       </span>
     </p>
   </div>
@@ -61,7 +63,9 @@ exports[`MoviePageDetails correctly renders after test 1`] = `
       </strong>
       <span
         className="movie-card__details-value"
-      />
+      >
+        Dramas
+      </span>
     </p>
     <p
       className="movie-card__details-item"
@@ -73,7 +77,9 @@ exports[`MoviePageDetails correctly renders after test 1`] = `
       </strong>
       <span
         className="movie-card__details-value"
-      />
+      >
+        2004
+      </span>
     </p>
   </div>
 </div>
