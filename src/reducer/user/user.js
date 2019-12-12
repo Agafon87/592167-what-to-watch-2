@@ -36,7 +36,7 @@ const Operation = {
         const {status} = err.response;
 
         if (status === StatusCode.FORBIDDEN || status === StatusCode.BAD_REQUEST) {
-          onError();
+          onError(status);
         }
       });
   }

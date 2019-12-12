@@ -2,13 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
+const StatusCode = {
+  FORBIDDEN: 403,
+  BAD_REQUEST: 400,
+};
+
+const Message = {
+  [StatusCode.FORBIDDEN]: <p>We can’t recognize this email <br /> and password combination. Please try again.</p>,
+  [StatusCode.BAD_REQUEST]: <p>Please enter a valid email address</p>,
+};
+
+const renderSignInMessage = (message) => {
+  return (
+    <div className="sign-in__message">
+      {message}
+    </div>
+  );
+};
+
 const SignIn = (props) => {
   const {
     onSetEmail,
     onSetPassword,
     email,
     password,
-    onFormSubmit
+    onFormSubmit,
+    statusCode,
   } = props;
 
   const handleSubmitForm = (evt) => {
@@ -36,6 +55,7 @@ const SignIn = (props) => {
         className="sign-in__form"
         onSubmit={handleSubmitForm}
       >
+        {statusCode && renderSignInMessage(Message[statusCode])}
         <div className="sign-in__fields">
           <div className="sign-in__field">
             <input
@@ -93,6 +113,7 @@ SignIn.propTypes = {
   onSetEmail: PropTypes.func,
   onSetPassword: PropTypes.func,
   onFormSubmit: PropTypes.func,
+  statusCode: PropTypes.number,
 };
 
 export default SignIn;

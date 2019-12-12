@@ -18,12 +18,13 @@ const withSignIn = (Component) => {
     }
 
     render() {
-      const {email, password} = this.state;
+      const {email, password, statusCode} = this.state;
 
       return <Component
         {...this.props}
         email={email}
         password={password}
+        statusCode={statusCode}
         onSetEmail={this._handleSetEmail}
         onSetPassword={this._handleSetPassword}
         onFormSubmit={this._handleFormSubmit}
@@ -38,12 +39,18 @@ const withSignIn = (Component) => {
       this.setState({password});
     }
 
+    _handleSetStatusCode(statusCode) {
+      this.setState({statusCode});
+    }
+
     _handleFormSubmit() {
       const {onAuthUser, history} = this.props;
       const {email, password} = this.state;
 
       const handleSuccess = () => history.push(`/`);
-      const handleError = () => {};
+      const handleError = (status) => {
+        this._handleSetStatusCode(status);
+      };
 
       onAuthUser({email, password}, handleSuccess, handleError);
     }
