@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 
 import Header from "../header/header.jsx";
 
+const MAX_STARS = 5;
+const MAX_MESSAGE_LENGTH = 400;
+
 class AddReview extends PureComponent {
   render() {
     const {
@@ -13,7 +16,8 @@ class AddReview extends PureComponent {
       onSetComment,
       onSetRating,
       onSubmitFormReview,
-      isButtonDisabled,
+      submitDisabled,
+      messageReview,
     } = this.props;
     const film = films.find((it) => it.id === parseInt(match.params.id, 10));
     const handleSubmitFormReview = (evt) => {
@@ -50,25 +54,19 @@ class AddReview extends PureComponent {
         >
           <div className="rating">
             <div className="rating__stars">
-              <input className="rating__input" id="star-1" type="radio" name="rating"
-                value="1" onChange={(evt) => onSetRating(evt.target.value)}/>
-              <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-              <input className="rating__input" id="star-2" type="radio" name="rating"
-                value="2" onChange={(evt) => onSetRating(evt.target.value)}/>
-              <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-              <input className="rating__input" id="star-3" type="radio" name="rating"
-                value="3" onChange={(evt) => onSetRating(evt.target.value)} checked/>
-              <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-              <input className="rating__input" id="star-4" type="radio" name="rating"
-                value="4" onChange={(evt) => onSetRating(evt.target.value)}/>
-              <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-              <input className="rating__input" id="star-5" type="radio" name="rating"
-                value="5" onChange={(evt) => onSetRating(evt.target.value)}/>
-              <label className="rating__label" htmlFor="star-5">Rating 5</label>
+              {Array.from({length: MAX_STARS}, (_, i) => i + 1).map((value) => (
+                <React.Fragment key={`input-${value}`}>
+                  <input
+                    className="rating__input"
+                    id={`star-${value}`}
+                    type="radio"
+                    name="rating"
+                    value={value}
+                    onChange={() => onSetRating(value)}
+                  />
+                  <label className="rating__label" htmlFor={`star-${value}`}>{`Rating ${value}`}</label>
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
@@ -78,17 +76,19 @@ class AddReview extends PureComponent {
               name="review-text"
               id="review-text"
               placeholder="Review text"
+              maxLength={MAX_MESSAGE_LENGTH}
               onChange={(evt) => onSetComment(evt.target.value)}
             ></textarea>
             <div className="add-review__submit">
               <button
                 className="add-review__btn"
                 type="submit"
-                disabled={isButtonDisabled}
+                disabled={submitDisabled}
               >Post</button>
             </div>
 
           </div>
+          <div>{messageReview}</div>
         </form>
       </div>
 
@@ -105,7 +105,8 @@ AddReview.propTypes = {
   onSetComment: PropTypes.func,
   onSetRating: PropTypes.func,
   onSubmitFormReview: PropTypes.func,
-  isButtonDisabled: PropTypes.bool,
+  submitDisabled: PropTypes.bool,
+  messageReview: PropTypes.string,
 };
 
 export default AddReview;

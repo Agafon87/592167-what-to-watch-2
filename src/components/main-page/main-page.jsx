@@ -23,7 +23,8 @@ class MainPage extends Component {
       onSetToFavorites,
       onGenreClick,
       filmsGenre,
-      genre
+      genre,
+      isFavorite,
     } = this.props;
 
     return <div>
@@ -71,7 +72,7 @@ class MainPage extends Component {
                   onClick={onSetToFavorites}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    {film.is_favorite ? (<use xlinkHref="#in-list"></use>) : <use xlinkHref="#add"></use>}
+                    {isFavorite ? (<use xlinkHref="#in-list"></use>) : <use xlinkHref="#add"></use>}
                   </svg>
                   <span>My list</span>
                 </button>
@@ -137,6 +138,7 @@ MainPage.propTypes = {
   onSwitchPlayer: PropTypes.func,
   onSetToFavorites: PropTypes.func,
   filmsGenre: PropTypes.array,
+  isFavorite: PropTypes.bool,
 };
 
 export default MainPage;

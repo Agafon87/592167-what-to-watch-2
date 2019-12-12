@@ -11,8 +11,6 @@ const withAppFilm = (Component) => {
       this.state = {
         filmId: -1
       };
-
-      // this.handleSmallMovieCardClick = this.handleSmallMovieCardClick.bind(this);
     }
 
     render() {
@@ -20,7 +18,6 @@ const withAppFilm = (Component) => {
 
       return <Component
         {...this.props}
-        // handleSmallMovieCardClick={this.handleSmallMovieCardClick}
         film={this._getFilm(films, this.state.filmId)}
         filmId={this.state.filmId}
       />;
@@ -29,14 +26,6 @@ const withAppFilm = (Component) => {
     _getFilm(films, id) {
       return films.find((it) => it.id === id);
     }
-
-    // handleSmallMovieCardClick(id, history, genre, changeGenre) {
-    //   this.setState({
-    //     filmId: id
-    //   });
-    //   changeGenre(genre);
-    //   history.push(`/films/${id}`);
-    // }
   }
 
   WithAppFilm.propTypes = {

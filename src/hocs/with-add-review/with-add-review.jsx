@@ -13,8 +13,9 @@ const withAddReview = (Component) => {
 
       this.state = {
         comment: ``,
-        rating: 3,
-        isButtonDisabled: true,
+        rating: 0,
+        submitDisabled: false,
+        messageReview: ``,
       };
 
       this._setComment = this._setComment.bind(this);
@@ -27,20 +28,43 @@ const withAddReview = (Component) => {
         onSetComment={this._setComment}
         onSetRating={this._setRating}
         onSubmitFormReview={this._handleSubmitFormReview}
-        isButtonDisabled={this.state.isButtonDisabled}
+        submitDisabled={this.state.submitDisabled}
+        messageReview={this._getMessage(this.state.rating, this.state.comment)}
       />;
     }
 
     _setComment(comment) {
       this.setState({comment});
-      const but = changeButtonStatus(comment);
-      this.setState({
-        isButtonDisabled: but
-      });
     }
 
     _setRating(rating) {
       this.setState({rating});
+    }
+
+    _getMessageForRating(rating) {
+      return (rating <= 0 || rating > 5) ? `You need to rate!` : ``;
+    }
+
+    _getMessageForComment(comment) {
+      return changeButtonStatus(comment) ? `Message should have at least 50 and maximum 400 characters!` : ``;
+    }
+
+    _getMessage(rating, comment) {
+      const errors = [];
+      errors.push(this._getMessageForRating(rating));
+      errors.push(this._getMessageForComment(comment));
+      for (const elem of errors) {
+        if (elem !== ``) {
+          this.setState({
+            submitDisabled: true
+          });
+          return elem;
+        }
+      }
+      this.setState({
+        submitDisabled: false
+      });
+      return ``;
     }
 
     _handleSubmitFormReview() {
@@ -60,10 +84,9 @@ const withAddReview = (Component) => {
     match: PropTypes.object,
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(withRouter(WithAddReview));
+  return connect(null, mapDispatchToProps)(withRouter(WithAddReview));
 };
 
-const mapStateToProps = () => {};
 const mapDispatchToProps = (dispatch) => ({
   onSubmitFormReview: (commentData, onSuccess, onError) => {
     dispatch(Operation.setComments(commentData, onSuccess, onError));

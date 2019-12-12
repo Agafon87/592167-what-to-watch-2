@@ -18,7 +18,8 @@ const MoviePage = (props) => {
     isAuthorizationRequired,
     userData,
     onSwitchPlayer,
-    onSetToFavorites
+    onSetToFavorites,
+    isFavorite
   } = props;
 
   return <React.Fragment>
@@ -61,7 +62,7 @@ const MoviePage = (props) => {
                 onClick={onSetToFavorites}
               >
                 <svg viewBox="0 0 19 20" width="19" height="20">
-                  {film.is_favorite ? (<use xlinkHref="#in-list"></use>) : <use xlinkHref="#add"></use>}
+                  {isFavorite ? (<use xlinkHref="#in-list"></use>) : <use xlinkHref="#add"></use>}
                 </svg>
                 <span>My list</span>
               </button>
@@ -132,6 +133,7 @@ MoviePage.propTypes = {
   userData: PropTypes.object,
   onSwitchPlayer: PropTypes.func,
   onSetToFavorites: PropTypes.func,
+  isFavorite: PropTypes.bool,
 };
 
 export default withRouter(MoviePage);

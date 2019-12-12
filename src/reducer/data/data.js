@@ -12,8 +12,10 @@ const StatusCode = {
   OK: 200,
   FORBIDDEN: 403,
   BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
   INTERNAL_SERVER_ERROR: 500
 };
+let favoriteFilms = [];
 
 const Operation = {
   loadFilms: () => (dispatch, _getState, api) => {
@@ -84,12 +86,13 @@ const Operation = {
       .then((response) => {
         if (response.status === StatusCode.OK) {
           const film = response.data;
-          dispatch(ActionCreators[`REMOVE_FAVORITE`](film));
-          dispatch(ActionCreators[`UPDATE_FAVORITE`](film));
+          const actionType = [`REMOVE_FAVORITE`, `UPDATE_FAVORITE`][status];
+
+          dispatch(ActionCreators[actionType](film));
         }
       })
       .catch((err) => {
-        if (err.status === StatusCode.FORBIDDEN || err.status === StatusCode.BAD_REQUEST) {
+        if (err.response.status === StatusCode.FORBIDDEN || err.response.status === StatusCode.BAD_REQUEST || err.response.status === StatusCode.UNAUTHORIZED) {
           onError();
         }
       });
@@ -117,12 +120,6 @@ const ActionCreators = {
       payload: (fullList) ? filmsList : moviesLikeGenre
     };
   },
-  // 'IS_AUTHORIZATION_REQUIRED': () => {
-  //   return {
-  //     type: `IS_AUTHORIZATION_REQUIRED`,
-  //     payload: false
-  //   };
-  // },
   'LOAD_FILM_PROMO': (filmPromo) => {
     return {
       type: `LOAD_FILM_PROMO`,
@@ -154,7 +151,6 @@ const ActionCreators = {
     };
   },
   'UPDATE_FAVORITE': (film) => {
-    // const favoriteFilms = this.state.favoriteFilms.concat(action.payload)
     return {
       type: `UPDATE_FAVORITE`,
       payload: film
@@ -173,9 +169,6 @@ const reducer = (state = initalState, action) => {
     case `CHANGE_FILMS_LIST`: return Object.assign({}, state, {
       likeFilms: action.payload
     });
-    // case `IS_AUTHORIZATION_REQUIRED`: return Object.assign({}, state, {
-    //   isAuthorizationRequired: action.payload
-    // });
     case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
       filmPromo: action.payload
     });
@@ -189,11 +182,11 @@ const reducer = (state = initalState, action) => {
       favoriteFilms: action.payload
     });
     case `REMOVE_FAVORITE`:
-      const favoriteFilms = state.favoriteFilms.filter((it) => it.id !== action.payload.id);
+      favoriteFilms = state.favoriteFilms.filter((it) => it.id !== action.payload.id);
       return Object.assign({}, state, {favoriteFilms});
-    case `UPDATE_FAVORITE`: Object.assign({}, state, {
-      favoriteFilms: state.favoriteFilms.concat(action.payload)
-    });
+    case `UPDATE_FAVORITE`:
+      favoriteFilms = state.favoriteFilms.concat(action.payload);
+      return Object.assign({}, state, {favoriteFilms});
   }
 
   return state;

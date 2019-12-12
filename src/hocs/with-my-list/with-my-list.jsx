@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFavoriteFilms} from "../../reducer/data/data-selectors.js";
+// import {getFavoriteFilms} from "../../reducer/data/data-selectors.js";
 import {Operation} from "../../reducer/data/data";
 
 const withMyList = (Component) => {
@@ -14,8 +14,7 @@ const withMyList = (Component) => {
     }
 
     componentDidMount() {
-      this.props.onLoadFavorites();
-      window.console.log(`componentDidMount()`);
+      // this.props.onLoadFavorites();
     }
   }
 
@@ -23,12 +22,13 @@ const withMyList = (Component) => {
     onLoadFavorites: PropTypes.func,
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithMyList);
+  // return connect(mapStateToProps, mapDispatchToProps)(WithMyList);
+  return connect(null, mapDispatchToProps)(WithMyList);
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  films: getFavoriteFilms(state)
-});
+// const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+//   films: getFavoriteFilms(state)
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadFavorites: () => {

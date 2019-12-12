@@ -5,7 +5,7 @@ import {Link, withRouter} from "react-router-dom";
 import MoviesList from "../movies-list/movies-list.jsx";
 
 const MyList = (props) => {
-  const {films, handleSmallMovieCardClick, history} = props;
+  const {favoriteFilms, handleSmallMovieCardClick, history} = props;
   return <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
@@ -30,7 +30,7 @@ const MyList = (props) => {
 
       <div className="catalog__movies-list">
         <MoviesList
-          films={films}
+          films={favoriteFilms}
           handleSmallMovieCardClick={handleSmallMovieCardClick}
           history={history}
         />
@@ -54,7 +54,7 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  films: PropTypes.array,
+  favoriteFilms: PropTypes.array,
   handleSmallMovieCardClick: PropTypes.func,
   history: PropTypes.object,
 };

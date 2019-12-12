@@ -21,7 +21,7 @@ import withAddReview from "../../hocs/with-add-review/with-add-review.jsx";
 import withPlayerActive from "../../hocs/with-player-active/with-player-active.jsx";
 import withMyList from "../../hocs/with-my-list/with-my-list.jsx";
 import {ActionCreators as DataActionCreators, Operation} from "../../reducer/data/data";
-import {getComments, getFilmsGenres} from "../../reducer/data/data-selectors";
+import {getComments, getFavoriteFilms, getFilmsGenres} from "../../reducer/data/data-selectors";
 
 const WithSignIn = withSignIn(SignIn);
 const WithAddReview = withAddReview(AddReview);
@@ -63,6 +63,7 @@ class App extends Component {
       comments,
       onLoadComments,
       onCleanComments,
+      favoriteFilms,
     } = this.props;
 
     const isAuth = !!Object.keys(userData).length;
@@ -80,6 +81,7 @@ class App extends Component {
               onGenreClick={onGenreClick}
               filmsGenre={filmsGenre}
               isAuthorizationRequired={isAuthorizationRequired}
+              isFavorite={favoriteFilms.some((film) => film.id === filmPromo.id)}
               userData={userData}
               film={filmPromo}
               history={history}
@@ -124,7 +126,7 @@ class App extends Component {
           exac
           isAuth={isAuth}
           component={WithMyList}
-          data={{handleSmallMovieCardClick}}
+          data={{handleSmallMovieCardClick, favoriteFilms}}
         />
         <PrivateRoute
           path="/films/:id/review"
@@ -155,6 +157,7 @@ App.propTypes = {
   comments: PropTypes.array,
   onLoadComments: PropTypes.func,
   onCleanComments: PropTypes.func,
+  favoriteFilms: PropTypes.array,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -164,7 +167,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   filmPromo: getFilmPromo(state),
   userData: getUserData(state),
   filmsGenre: getFilmsGenres(state),
-  comments: getComments(state)
+  comments: getComments(state),
+  favoriteFilms: getFavoriteFilms(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

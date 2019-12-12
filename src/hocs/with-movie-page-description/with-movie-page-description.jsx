@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getFilmsLikeGenre} from "../../reducer/data/data-selectors.js";
+import {getFilmsLikeGenre, getFavoriteFilms} from "../../reducer/data/data-selectors.js";
 
 const MAX_COUNT_LIKE_FILMS = 4;
 
@@ -10,15 +10,17 @@ const withMoviePageDescription = (Component) => {
     constructor(props) {
       super(props);
 
-      const {match} = this.props;
+      const {match, favoriteFilms} = this.props;
 
       const film = this._getFilmById(parseInt(match.params.id, 10));
       const likeFilms = this._getLikeFilms(film);
+      const isFavorite = favoriteFilms.some((it) => it.id === film.id);
 
       this.state = {
         filmTab: `overview`,
         film,
         likeFilms,
+        isFavorite,
       };
 
       this.handleMoviePageTabClick = this.handleMoviePageTabClick.bind(this);
@@ -33,17 +35,20 @@ const withMoviePageDescription = (Component) => {
         likeFilms={this.state.likeFilms}
         film={this.state.film}
         onSetToFavorites={this._handleSetToFavorites}
+        isFavorite={this.state.isFavorite}
       />;
     }
 
     componentDidUpdate(prevProps) {
-      const {films, match} = this.props;
+      const {films, match, favoriteFilms} = this.props;
 
-      if (!prevProps.films.length && films.length || prevProps.match.params.id !== match.params.id) {
+      if (!prevProps.films.length && films.length || prevProps.match.params.id !== match.params.id || prevProps.favoriteFilms.length !== favoriteFilms.length) {
         const film = this._getFilmById(parseInt(match.params.id, 10));
         const likeFilms = this._getLikeFilms(film);
+        const isFavorite = favoriteFilms.some((it) => it.id === film.id);
+        const filmTab = `overview`;
 
-        this.setState({film, likeFilms});
+        this.setState({film, likeFilms, filmTab, isFavorite});
       }
     }
 
@@ -72,7 +77,7 @@ const withMoviePageDescription = (Component) => {
     _handleSetToFavorites() {
       const {onChangeFavoriteList} = this.props;
       const {film} = this.state;
-      const status = +!film.is_favorite;
+      const status = +!this.state.isFavorite;
 
       onChangeFavoriteList(film.id, status, this._handleFavoriteListError);
     }
@@ -88,6 +93,7 @@ const withMoviePageDescription = (Component) => {
     match: PropTypes.object,
     history: PropTypes.object,
     onChangeFavoriteList: PropTypes.func,
+    favoriteFilms: PropTypes.array,
   };
 
   return connect(mapStateToProps)(WithMoviePageDescription);
@@ -95,6 +101,7 @@ const withMoviePageDescription = (Component) => {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   tempFilms: getFilmsLikeGenre(state),
+  favoriteFilms: getFavoriteFilms(state),
 });
 
 export default withMoviePageDescription;

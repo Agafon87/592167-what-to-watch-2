@@ -5,6 +5,9 @@ const RATING_NUMBERS = {
   'TEN': 10,
 };
 
+const MIN_MESSAGE_LENGTH = 50;
+const MAX_MESSAGE_LENGTH = 400;
+
 const SECONDS_IN_MINUTE = 60;
 // const MINUTES_IN_HOUR = 60;
 const SECONDS_IN_HOUR = 3600;
@@ -30,7 +33,7 @@ export const getNewDate = (dateString) => {
 };
 
 export const changeButtonStatus = (review) => {
-  if (review.length >= 50 && review.length <= 400) {
+  if (review.length >= MIN_MESSAGE_LENGTH && review.length <= MAX_MESSAGE_LENGTH) {
     return false;
   }
   return true;

@@ -20,13 +20,11 @@ export const getFilmsGenres = createSelector(getFilms, (films) => {
 
 export const getSortComments = createSelector(getComments, (comments) => {
   let tempComments = comments;
-  // window.console.log(tempComments);
   if (comments.length > 0) {
     tempComments = comments.splice(0).sort((a, b) => {
       return a.rating > b.rating;
     });
   }
 
-  window.console.log(tempComments);
   return tempComments;
 });

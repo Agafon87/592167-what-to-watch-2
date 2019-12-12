@@ -33,15 +33,15 @@ const withMainPage = (Component) => {
     }
 
     _handleSetToFavorites() {
-      const {onChangeFavoriteList, film} = this.props;
-      const status = +!film.is_favorite;
+      const {onChangeFavoriteList, film, isFavorite} = this.props;
+      const status = +!isFavorite;
 
       onChangeFavoriteList(film.id, status, this._handleFavoriteListError);
     }
 
     _handleFavoriteListError() {
-      const {history, film} = this.props;
-      history.push(`/login?redirect=/film/${film.id}`);
+      const {history} = this.props;
+      history.push(`/login`);
     }
   }
 
@@ -49,6 +49,7 @@ const withMainPage = (Component) => {
     film: PropTypes.object,
     history: PropTypes.object,
     onChangeFavoriteList: PropTypes.func,
+    isFavorite: PropTypes.bool,
   };
 
   return WithMainPage;
