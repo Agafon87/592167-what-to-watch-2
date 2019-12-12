@@ -2,12 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-// import {ActionCreators} from "../../reducer/data/data";
-// import {connect} from "react-redux";
-
 const SignIn = (props) => {
   const {
-    // onSignInClick,
     onSetEmail,
     onSetPassword,
     email,
@@ -99,15 +95,4 @@ SignIn.propTypes = {
   onFormSubmit: PropTypes.func,
 };
 
-// const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-//   isAuthorizationRequired: state[`DATA`].isAuthorizationRequired,
-// });
-//
-// const mapDispatchToProps = (dispatch) => ({
-//   onSignInClick: () => {
-//     dispatch(ActionCreators[`IS_AUTHORIZATION_REQUIRED`](true));
-//   }
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 export default SignIn;

@@ -193,6 +193,7 @@ const mock = {
   onAuthUser: jest.fn(),
   onChangeFavoriteList: jest.fn(),
   filmsGenre: [`All genres`, `Thrillers`, `Horror`, `Romance`, `Comedies`],
+  favoriteFilms: []
 };
 
 describe(`App component`, () => {
@@ -209,6 +210,7 @@ describe(`App component`, () => {
     onAuthUser,
     onChangeFavoriteList,
     filmsGenre,
+    favoriteFilms,
   } = mock;
 
   it(`renders correctly`, () => {
@@ -227,6 +229,7 @@ describe(`App component`, () => {
             onAuthUser={onAuthUser}
             onChangeFavoriteList={onChangeFavoriteList}
             filmsGenre={filmsGenre}
+            favoriteFilms={favoriteFilms}
           />
         </BrowserRouter>,
         {createNodeMock: (el) => {

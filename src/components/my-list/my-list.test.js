@@ -4,7 +4,7 @@ import MyList from "./my-list.jsx";
 import {BrowserRouter} from "react-router-dom";
 
 const mock = {
-  films: [
+  favoriteFilms: [
     {
       id: 1,
       name: `Фантастические твари: Преступления Грин-де-Вальда`,
@@ -129,13 +129,13 @@ const mock = {
 };
 
 describe(`MyList component`, () => {
-  const {films, history, handleSmallMovieCardClick} = mock;
+  const {favoriteFilms, history, handleSmallMovieCardClick} = mock;
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
         <BrowserRouter>
           <MyList
-            films={films}
+            favoriteFilms={favoriteFilms}
             history={history}
             handleSmallMovieCardClick={handleSmallMovieCardClick}
           />

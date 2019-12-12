@@ -89,7 +89,7 @@ exports[`AddReview component renders correctly 1`] = `
             name="rating"
             onChange={[Function]}
             type="radio"
-            value="1"
+            value={1}
           />
           <label
             className="rating__label"
@@ -103,7 +103,7 @@ exports[`AddReview component renders correctly 1`] = `
             name="rating"
             onChange={[Function]}
             type="radio"
-            value="2"
+            value={2}
           />
           <label
             className="rating__label"
@@ -112,13 +112,12 @@ exports[`AddReview component renders correctly 1`] = `
             Rating 2
           </label>
           <input
-            checked={true}
             className="rating__input"
             id="star-3"
             name="rating"
             onChange={[Function]}
             type="radio"
-            value="3"
+            value={3}
           />
           <label
             className="rating__label"
@@ -132,7 +131,7 @@ exports[`AddReview component renders correctly 1`] = `
             name="rating"
             onChange={[Function]}
             type="radio"
-            value="4"
+            value={4}
           />
           <label
             className="rating__label"
@@ -146,7 +145,7 @@ exports[`AddReview component renders correctly 1`] = `
             name="rating"
             onChange={[Function]}
             type="radio"
-            value="5"
+            value={5}
           />
           <label
             className="rating__label"
@@ -162,6 +161,7 @@ exports[`AddReview component renders correctly 1`] = `
         <textarea
           className="add-review__textarea"
           id="review-text"
+          maxLength={400}
           name="review-text"
           onChange={[Function]}
           placeholder="Review text"
@@ -171,13 +171,13 @@ exports[`AddReview component renders correctly 1`] = `
         >
           <button
             className="add-review__btn"
-            disabled={true}
             type="submit"
           >
             Post
           </button>
         </div>
       </div>
+      <div />
     </form>
   </div>
 </section>
