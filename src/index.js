@@ -4,10 +4,10 @@ import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
+import {BrowserRouter} from "react-router-dom";
 
 import App from "./components/app/app.jsx";
 import reducer from "./reducer/reducer";
-// import withMoviePageDescription from "./hocs/with-movie-page-description/with-movie-page-description.jsx";
 import withAppFilm from "./hocs/with-app-film/with-app-film.jsx";
 import createAPI from "./api";
 import {Operation} from "./reducer/data/data";
@@ -32,7 +32,9 @@ const WithAppFilm = withAppFilm(App);
 const init = () => {
   ReactDOM.render(
       <Provider store={store}>
-        <WithAppFilm />
+        <BrowserRouter>
+          <WithAppFilm />
+        </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`));
 };

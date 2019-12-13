@@ -1,18 +1,10 @@
 import React from "react";
-import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import withMainPage from "./with-main-page.jsx";
-
-configure({adapter: new Adapter()});
-
-const MockComponent = () => {
-  return <div></div>;
-};
-
-const MockComponentWithHoc = withMainPage(MockComponent);
+import renderer from "react-test-renderer";
+import MyList from "./my-list.jsx";
+import {BrowserRouter} from "react-router-dom";
 
 const mock = {
-  movies: [
+  favoriteFilms: [
     {
       id: 1,
       name: `Фантастические твари: Преступления Грин-де-Вальда`,
@@ -130,15 +122,29 @@ const mock = {
           date: `2015-11-18T14:13:56.569Z`
         }
       ]
-    }
-  ]
+    },
+  ],
+  history: {},
+  handleSmallMovieCardClick: jest.fn(),
 };
 
+describe(`MyList component`, () => {
+  const {favoriteFilms, history, handleSmallMovieCardClick} = mock;
 
-it(`component reternd with withMainPage hoc`, () => {
-  const {movies} = mock;
+  it(`renders correctly`, () => {
+    const tree = renderer.create(
+        <BrowserRouter>
+          <MyList
+            favoriteFilms={favoriteFilms}
+            history={history}
+            handleSmallMovieCardClick={handleSmallMovieCardClick}
+          />
+        </BrowserRouter>,
+        {createNodeMock: (el) => {
+          return el;
+        }}
+    ).toJSON();
 
-  const component = mount(<MockComponentWithHoc films={movies}/>);
-
-  expect(component.state().filmsCount).toEqual(8);
+    expect(tree).toMatchSnapshot();
+  });
 });

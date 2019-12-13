@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovePage correctly renders after test 1`] = `
+exports[`MoviePage component renders correctly 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
@@ -12,8 +12,7 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt=""
-          src="img/bg-the-grand-budapest-hotel.jpg"
+          alt="Авиатор"
         />
       </div>
       <h1
@@ -29,7 +28,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -51,16 +51,13 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
+            Sign in
+          </a>
         </div>
       </header>
       <div
@@ -72,23 +69,28 @@ Array [
           <h2
             className="movie-card__title"
           >
-            
+            Авиатор
           </h2>
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            />
+            >
+              Dramas
+            </span>
             <span
               className="movie-card__year"
-            />
+            >
+              2004
+            </span>
           </p>
           <div
             className="movie-card__buttons"
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[MockFunction]}
               type="button"
             >
               <svg
@@ -106,6 +108,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[MockFunction]}
               type="button"
             >
               <svg
@@ -123,7 +126,8 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/films/undefined/review"
+              onClick={[Function]}
             >
               Add review
             </a>
@@ -141,7 +145,7 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Авиатор"
             height="327"
             width="218"
           />
@@ -207,7 +211,68 @@ Array [
       </h2>
       <div
         className="catalog__movies-list"
-      />
+      >
+        <div
+          className="catalog__movies-list"
+        >
+          <article
+            className="small-movie-card catalog__movies-card"
+            onMouseEnter={null}
+          >
+            <a
+              href="/films/1"
+              onClick={[Function]}
+            >
+              <video
+                className=""
+                height="175"
+                width="280"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </a>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="/films/1"
+                onClick={[Function]}
+              >
+                Фантастические твари: Преступления Грин-де-Вальда
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
+            onMouseEnter={null}
+          >
+            <a
+              href="/films/2"
+              onClick={[Function]}
+            >
+              <video
+                className=""
+                height="175"
+                width="280"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </a>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="/films/2"
+                onClick={[Function]}
+              >
+                Богемская рапсодия
+              </a>
+            </h3>
+          </article>
+        </div>
+      </div>
     </section>
     <footer
       className="page-footer"
@@ -217,7 +282,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

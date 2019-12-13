@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs correctly renderer after test 1`] = `null`;
+exports[`Tabs component renders correctly 1`] = `null`;

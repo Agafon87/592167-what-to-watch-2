@@ -1,35 +1,73 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-player.jsx";
 
-const SmallMovieCard = (props) => {
-  const {
-    filmCard,
-    handleSmallMovieCardMouseEnter,
-    handleSmallMovieCardMouseLeave,
-    handleSmallMovieCardClick,
-  } = props;
-  return <article
-    className="small-movie-card catalog__movies-card"
-    onClick={() => handleSmallMovieCardClick(filmCard.id)}
-  >
-    <VideoPlayer
-      className="small-movie-card__image"
-      filmCard={filmCard}
-      handleSmallMovieCardMouseEnter={handleSmallMovieCardMouseEnter}
-      handleSmallMovieCardMouseLeave={handleSmallMovieCardMouseLeave}
-    />
-    <h3 className="small-movie-card__title">
-      <a className="small-movie-card__link" href="movie-page.html">{filmCard.name}</a>
-    </h3>
-  </article>;
-};
+const TIMEOUT = 1000;
+
+class SmallMovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._cardRef = React.createRef();
+
+    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+  }
+
+  render() {
+    const {isLoading, film, renderPlayer} = this.props;
+
+    const link = `/films/${film.id}`;
+
+    return (
+      <article
+        ref={this._articleRef}
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={isLoading ? null : this._handleMouseEnter}
+      >
+        <Link to={link}>
+          {renderPlayer({
+            size: {width: `280`, height: `175`},
+            className: ``,
+          })}
+        </Link>
+        <h3 className="small-movie-card__title" >
+          <Link className="small-movie-card__link" to={link}>
+            {film.name}
+          </Link>
+        </h3>
+      </article>
+    );
+  }
+
+  componentWillUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+  }
+
+  _handleMouseEnter(evt) {
+    const {currentTarget} = evt;
+    const {film, onStartPreview, onStopPreview} = this.props;
+
+    this.timeoutId = setTimeout(() => {
+      onStartPreview(film.name);
+    }, TIMEOUT);
+
+    currentTarget.onmouseleave = () => {
+      onStopPreview();
+      clearTimeout(this.timeoutId);
+      currentTarget.onmouseleave = null;
+      delete this.timeoutId;
+    };
+  }
+}
 
 SmallMovieCard.propTypes = {
-  filmCard: PropTypes.object,
-  handleSmallMovieCardMouseEnter: PropTypes.func,
-  handleSmallMovieCardMouseLeave: PropTypes.func,
-  handleSmallMovieCardClick: PropTypes.func
+  film: PropTypes.object,
+  isLoading: PropTypes.bool,
+  renderPlayer: PropTypes.func,
+  onStopPreview: PropTypes.func,
+  onStartPreview: PropTypes.func,
 };
 
 export default SmallMovieCard;

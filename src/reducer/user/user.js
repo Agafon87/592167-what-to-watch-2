@@ -19,7 +19,9 @@ const Operation = {
           dispatch(ActionCreators[`SET_USER_DATA`](response.data));
         }
       })
-      .catch((err) => err);
+      .catch((err) => {
+        return err;
+      });
   },
   setUserData: (userData, onSuccess, onError) => (dispatch, _getState, api) => {
     return api
@@ -34,7 +36,7 @@ const Operation = {
         const {status} = err.response;
 
         if (status === StatusCode.FORBIDDEN || status === StatusCode.BAD_REQUEST) {
-          onError();
+          onError(status);
         }
       });
   }

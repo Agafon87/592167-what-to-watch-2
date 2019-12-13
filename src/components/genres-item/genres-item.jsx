@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const GenresItem = (props) => {
-  const {films, genre, onGenreClick, genreList} = props;
+  const {films, genre, onGenreClick, filmsGenre} = props;
 
   return (
     <ul className="catalog__genres-list">
@@ -16,7 +16,7 @@ const GenresItem = (props) => {
         >{`All genres`}
         </a>
       </li>
-      {genreList.map((it, i) => {
+      {filmsGenre.map((it, i) => {
         return <li
           className={`catalog__genres-item ${it === genre ? `catalog__genres-item--active` : ``}`}
           key={i}
@@ -37,7 +37,7 @@ GenresItem.propTypes = {
   films: PropTypes.array,
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
-  genreList: PropTypes.array
+  filmsGenre: PropTypes.array
 };
 
 export default GenresItem;
