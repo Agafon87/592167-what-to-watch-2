@@ -270,7 +270,10 @@ describe(`test connections to server`, () => {
     apiMock.onPost(path).reply(200, [{fake: true}]);
     favoriteFilmsPost(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledWith(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `UPDATE_FAVORITE`,
+          payload: [{fake: true}]
+        });
       });
   });
 });
