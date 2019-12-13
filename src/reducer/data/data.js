@@ -26,7 +26,6 @@ const Operation = {
           const films = response.data;
 
           dispatch(ActionCreators[`LOAD_FILMS`](films));
-          dispatch(ActionCreators[`CHANGE_FILMS_LIST`](films, initalState.genre));
         }
       });
   },
@@ -112,14 +111,6 @@ const ActionCreators = {
       payload: genre
     };
   },
-  'CHANGE_FILMS_LIST': (filmsList, genre) => {
-    const moviesLikeGenre = filmsList.filter((elem) => elem.genre === genre);
-    const fullList = genre.toLowerCase() === `all genres`;
-    return {
-      type: `CHANGE_FILMS_LIST`,
-      payload: (fullList) ? filmsList : moviesLikeGenre
-    };
-  },
   'LOAD_FILM_PROMO': (filmPromo) => {
     return {
       type: `LOAD_FILM_PROMO`,
@@ -165,9 +156,6 @@ const reducer = (state = initalState, action) => {
     });
     case `CHANGE_GENRE`: return Object.assign({}, state, {
       genre: action.payload
-    });
-    case `CHANGE_FILMS_LIST`: return Object.assign({}, state, {
-      likeFilms: action.payload
     });
     case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
       filmPromo: action.payload
