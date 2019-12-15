@@ -18,41 +18,41 @@ const withAddReview = (Component) => {
         messageReview: ``,
       };
 
-      this._setComment = this._setComment.bind(this);
-      this._setRating = this._setRating.bind(this);
+      this._handleSetComment = this._handleSetComment.bind(this);
+      this._handleSetRating = this._handleSetRating.bind(this);
       this._handleSubmitFormReview = this._handleSubmitFormReview.bind(this);
     }
     render() {
       return <Component
         {...this.props}
-        onSetComment={this._setComment}
-        onSetRating={this._setRating}
+        onSetComment={this._handleSetComment}
+        onSetRating={this._handleSetRating}
         onSubmitFormReview={this._handleSubmitFormReview}
         submitDisabled={this.state.submitDisabled}
         messageReview={this._getMessage(this.state.rating, this.state.comment)}
       />;
     }
 
-    _setComment(comment) {
+    _handleSetComment(comment) {
       this.setState({comment});
     }
 
-    _setRating(rating) {
+    _handleSetRating(rating) {
       this.setState({rating});
     }
 
-    _getMessageForRating(rating) {
+    _handleGetMessageForRating(rating) {
       return (rating <= 0 || rating > 5) ? `You need to rate!` : ``;
     }
 
-    _getMessageForComment(comment) {
+    _handleGetMessageForComment(comment) {
       return changeButtonStatus(comment) ? `Message should have at least 50 and maximum 400 characters!` : ``;
     }
 
     _getMessage(rating, comment) {
       const errors = [];
-      errors.push(this._getMessageForRating(rating));
-      errors.push(this._getMessageForComment(comment));
+      errors.push(this._handleGetMessageForRating(rating));
+      errors.push(this._handleGetMessageForComment(comment));
       for (const elem of errors) {
         if (elem !== ``) {
           this.setState({

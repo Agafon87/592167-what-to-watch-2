@@ -16,14 +16,13 @@ const withActiveItem = (Component) => {
     render() {
       return <Component
         {...this.props}
-        genreList={this._getScores(this.props.films)}
+        genreList={this._handleGetScores(this.props.films)}
       />;
     }
 
-    _getScores(setElements) {
+    _handleGetScores(setElements) {
       const tempSet = new Set(setElements.map((it) => it.genre));
-      const tempList = [...tempSet];
-      return tempList;
+      return [...tempSet];
     }
   }
 

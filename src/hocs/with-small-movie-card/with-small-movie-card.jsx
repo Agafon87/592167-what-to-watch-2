@@ -15,16 +15,16 @@ const withSmallMovieCard = (Component) => {
 
       this._handleStartPreview = this._handleStartPreview.bind(this);
       this._handleStopPreview = this._handleStopPreview.bind(this);
-      this._renderSmallMovieCard = this._renderSmallMovieCard.bind(this);
-      this._getPartOfFilms = this._getPartOfFilms.bind(this);
+      this._handleRenderSmallMovieCard = this._handleRenderSmallMovieCard.bind(this);
+      this._handleGetPartOfFilms = this._handleGetPartOfFilms.bind(this);
     }
 
     render() {
       const {films, filmsCount} = this.props;
 
       return <Component
-        films={this._getPartOfFilms(films, filmsCount)}
-        renderSmallMovieCard={this._renderSmallMovieCard}
+        films={this._handleGetPartOfFilms(films, filmsCount)}
+        renderSmallMovieCard={this._handleRenderSmallMovieCard}
       />;
     }
 
@@ -36,7 +36,7 @@ const withSmallMovieCard = (Component) => {
       this.setState({currentFilm: ``});
     }
 
-    _renderSmallMovieCard(film) {
+    _handleRenderSmallMovieCard(film) {
       const {currentFilm} = this.state;
 
       return (
@@ -51,7 +51,7 @@ const withSmallMovieCard = (Component) => {
       );
     }
 
-    _getPartOfFilms(films, filmsCount) {
+    _handleGetPartOfFilms(films, filmsCount) {
       return films.slice(0, filmsCount);
     }
   }
