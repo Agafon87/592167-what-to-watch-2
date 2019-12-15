@@ -16,6 +16,16 @@ const StatusCode = {
   INTERNAL_SERVER_ERROR: 500
 };
 let favoriteFilms = [];
+const ActionType = {
+  LOAD_FILMS: `LOAD_FILMS`,
+  CHANGE_GENRE: `CHANGE_GENRE`,
+  LOAD_FILM_PROMO: `LOAD_FILM_PROMO`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
+  CLEAN_COMMENTS: `CLEAN_COMMENTS`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`,
+  REMOVE_FAVORITE: `REMOVE_FAVORITE`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
+};
 
 const Operation = {
   loadFilms: () => (dispatch, _getState, api) => {
@@ -101,49 +111,49 @@ const Operation = {
 const ActionCreators = {
   'LOAD_FILMS': (films) => {
     return {
-      type: `LOAD_FILMS`,
+      type: ActionType.LOAD_FILMS,
       payload: films
     };
   },
   'CHANGE_GENRE': (genre) => {
     return {
-      type: `CHANGE_GENRE`,
+      type: ActionType.CHANGE_GENRE,
       payload: genre
     };
   },
   'LOAD_FILM_PROMO': (filmPromo) => {
     return {
-      type: `LOAD_FILM_PROMO`,
+      type: ActionType.LOAD_FILM_PROMO,
       payload: filmPromo
     };
   },
   'LOAD_COMMENTS': (comments) => {
     return {
-      type: `LOAD_COMMENTS`,
+      type: ActionType.LOAD_COMMENTS,
       payload: comments
     };
   },
   'CLEAN_COMMENTS': () => {
     return {
-      type: `CLEAN_COMMENTS`,
+      type: ActionType.CLEAN_COMMENTS,
       payload: []
     };
   },
   'LOAD_FAVORITE_FILMS': (films) => {
     return {
-      type: `LOAD_FAVORITE_FILMS`,
+      type: ActionType.LOAD_FAVORITE_FILMS,
       payload: films
     };
   },
   'REMOVE_FAVORITE': (film) => {
     return {
-      type: `REMOVE_FAVORITE`,
+      type: ActionType.REMOVE_FAVORITE,
       payload: film
     };
   },
   'UPDATE_FAVORITE': (film) => {
     return {
-      type: `UPDATE_FAVORITE`,
+      type: ActionType.UPDATE_FAVORITE,
       payload: film
     };
   }
@@ -151,28 +161,28 @@ const ActionCreators = {
 
 const reducer = (state = initalState, action) => {
   switch (action.type) {
-    case `LOAD_FILMS`: return Object.assign({}, state, {
+    case ActionType.LOAD_FILMS: return Object.assign({}, state, {
       films: action.payload
     });
-    case `CHANGE_GENRE`: return Object.assign({}, state, {
+    case ActionType.CHANGE_GENRE: return Object.assign({}, state, {
       genre: action.payload
     });
-    case `LOAD_FILM_PROMO`: return Object.assign({}, state, {
+    case ActionType.LOAD_FILM_PROMO: return Object.assign({}, state, {
       filmPromo: action.payload
     });
-    case `LOAD_COMMENTS`: return Object.assign({}, state, {
+    case ActionType.LOAD_COMMENTS: return Object.assign({}, state, {
       comments: action.payload
     });
-    case `CLEAN_COMMENTS`: return Object.assign({}, state, {
+    case ActionType.CLEAN_COMMENTS: return Object.assign({}, state, {
       comments: action.payload
     });
-    case `LOAD_FAVORITE_FILMS`: return Object.assign({}, state, {
+    case ActionType.LOAD_FAVORITE_FILMS: return Object.assign({}, state, {
       favoriteFilms: action.payload
     });
-    case `REMOVE_FAVORITE`:
+    case ActionType.REMOVE_FAVORITE:
       favoriteFilms = state.favoriteFilms.filter((it) => it.id !== action.payload.id);
       return Object.assign({}, state, {favoriteFilms});
-    case `UPDATE_FAVORITE`:
+    case ActionType.UPDATE_FAVORITE:
       favoriteFilms = state.favoriteFilms.concat(action.payload);
       return Object.assign({}, state, {favoriteFilms});
   }

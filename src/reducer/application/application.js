@@ -3,10 +3,14 @@ const initialState = {
 };
 Object.freeze(initialState);
 
+const ActionType = {
+  SET_STATUS_SERVER: `SET_STATUS_SERVER`
+};
+
 const ActionCreators = {
   'SET_STATUS_SERVER': (status) => {
     return {
-      type: `SET_STATUS_SERVER`,
+      type: ActionType.SET_STATUS_SERVER,
       payload: status
     };
   }
@@ -14,7 +18,7 @@ const ActionCreators = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `SET_STATUS_SERVER`:
+    case ActionType.SET_STATUS_SERVER:
       return Object.assign({}, state, {
         isServerResponding: action.payload
       });

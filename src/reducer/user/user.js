@@ -10,6 +10,10 @@ const StatusCode = {
   INTERNAL_SERVER_ERROR: 500
 };
 
+const ActionType = {
+  SET_USER_DATA: `SET_USER_DATA`,
+};
+
 const Operation = {
   loginInUser: () => (dispatch, _getState, api) => {
     return api
@@ -45,7 +49,7 @@ const Operation = {
 const ActionCreators = {
   'SET_USER_DATA': (data) => {
     return {
-      type: `SET_USER_DATA`,
+      type: ActionType.SET_USER_DATA,
       payload: data
     };
   }
@@ -53,7 +57,7 @@ const ActionCreators = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `SET_USER_DATA`:
+    case ActionType.SET_USER_DATA:
       return Object.assign({}, state, {
         userData: action.payload
       });
