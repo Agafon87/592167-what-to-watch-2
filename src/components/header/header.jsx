@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import UserBlock from "../user-block/user-block.jsx";
 import Logo from "../logo/logo.jsx";
+import PropType from "../../proptypes.js";
 
 const Header = (props) => {
   const {userData, isMainPage} = props;
@@ -14,7 +15,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  userData: PropTypes.object,
+  userData: PropType.userData,
   isMainPage: PropTypes.bool,
 };
 

@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 import {getNewDate} from "../../utils.js";
+import PropType from "../../proptypes.js";
 
 class MoviePageReviews extends PureComponent {
   componentDidMount() {
@@ -74,9 +75,9 @@ class MoviePageReviews extends PureComponent {
 
 
 MoviePageReviews.propTypes = {
-  film: PropTypes.object,
+  film: PropType.film,
   onLoadComments: PropTypes.func,
-  comments: PropTypes.array,
+  comments: PropType.review,
   onCleanComments: PropTypes.func,
 };
 

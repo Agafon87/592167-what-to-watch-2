@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getFilms} from "../../reducer/data/data-selectors.js";
+import PropType from "../../proptypes.js";
 
 const withAppFilm = (Component) => {
   class WithAppFilm extends PureComponent {
@@ -29,7 +30,7 @@ const withAppFilm = (Component) => {
   }
 
   WithAppFilm.propTypes = {
-    films: PropTypes.array,
+    films: PropTypes.arrayOf(PropType.film),
     onChangeGenre: PropTypes.func,
   };
 

@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 
 import MoviesList from "../movies-list/movies-list.jsx";
 import Header from "../header/header.jsx";
+import PropType from "../../proptypes.js";
 
 const MyList = (props) => {
   const {
@@ -49,11 +50,11 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  favoriteFilms: PropTypes.array,
+  favoriteFilms: PropTypes.arrayOf(PropType.film),
   handleSmallMovieCardClick: PropTypes.func,
   history: PropTypes.object,
   isAuthorizationRequired: PropTypes.bool,
-  userData: PropTypes.object,
+  userData: PropType.userData,
 };
 
 export default withRouter(MyList);

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import withLoading from "../with-loading/with-loading.jsx";
 import SmallMovieCard from "../../components/small-movie-card/small-movie-card.jsx";
+import PropType from "../../proptypes.js";
 
 const FilmCardWithLoading = withLoading(SmallMovieCard);
 
@@ -57,7 +58,7 @@ const withSmallMovieCard = (Component) => {
   }
 
   WithSmallMovieCard.propTypes = {
-    films: PropTypes.array,
+    films: PropTypes.arrayOf(PropType.film),
     filmsCount: PropTypes.number,
   };
 

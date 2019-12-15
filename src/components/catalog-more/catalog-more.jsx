@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 const CatalogMore = (props) => {
   const {films, filmsCount, onCatalogMoreClick} = props;
@@ -13,7 +14,7 @@ const CatalogMore = (props) => {
 };
 
 CatalogMore.propTypes = {
-  films: PropTypes.array,
+  films: PropTypes.arrayOf(PropType.film),
   filmsCount: PropTypes.number,
   onCatalogMoreClick: PropTypes.func
 };

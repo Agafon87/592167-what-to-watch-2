@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getFilms, getGenre} from "../../reducer/data/data-selectors.js";
+import PropType from "../../proptypes.js";
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends PureComponent {
@@ -27,7 +28,7 @@ const withActiveItem = (Component) => {
   }
 
   WithActiveItem.propTypes = {
-    films: PropTypes.array
+    films: PropTypes.arrayOf(PropType.film)
   };
 
   return WithActiveItem;

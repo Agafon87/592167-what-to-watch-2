@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {withRouter} from "react-router-dom";
+import PropType from "../../proptypes.js";
 
 const withSignIn = (Component) => {
   class WithSignIn extends PureComponent {
@@ -59,7 +60,7 @@ const withSignIn = (Component) => {
 
   WithSignIn.propTypes = {
     onAuthUser: PropTypes.func,
-    userData: PropTypes.object,
+    userData: PropType.userData,
     history: PropTypes.object,
   };
 

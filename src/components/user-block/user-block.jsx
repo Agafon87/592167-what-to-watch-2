@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 const renderUserBlock = (userData) => {
   if (!Object.keys(userData).length) {
@@ -26,7 +26,7 @@ const UserBlock = (props) => {
 };
 
 UserBlock.propTypes = {
-  userData: PropTypes.object,
+  userData: PropType.userData,
 };
 
 export default UserBlock;

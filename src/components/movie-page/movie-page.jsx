@@ -6,6 +6,7 @@ import Tabs from "../tabs/tabs.jsx";
 import NavigationMoviePageTabs from "../navigation/navigation.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Header from "../header/header.jsx";
+import PropType from "../../proptypes.js";
 
 const MoviePage = (props) => {
   const {
@@ -123,14 +124,14 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  film: PropTypes.object,
+  film: PropType.film,
   handleMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string,
-  likeFilms: PropTypes.array,
+  likeFilms: PropTypes.arrayOf(PropType.film),
   handleSmallMovieCardClick: PropTypes.func,
   match: PropTypes.object,
   isAuthorizationRequired: PropTypes.bool,
-  userData: PropTypes.object,
+  userData: PropType.userData,
   onSwitchPlayer: PropTypes.func,
   onSetToFavorites: PropTypes.func,
   isFavorite: PropTypes.bool,

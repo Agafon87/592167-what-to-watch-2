@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 import {getRating} from "../../utils.js";
 
@@ -29,7 +29,7 @@ const MoviePageOverview = (props) => {
 };
 
 MoviePageOverview.propTypes = {
-  film: PropTypes.object
+  film: PropType.film
 };
 
 export default MoviePageOverview;

@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 const withMainPage = (Component) => {
   class WithMainPage extends PureComponent {
@@ -46,7 +47,7 @@ const withMainPage = (Component) => {
   }
 
   WithMainPage.propTypes = {
-    film: PropTypes.object,
+    film: PropType.film,
     history: PropTypes.object,
     onChangeFavoriteList: PropTypes.func,
     isFavorite: PropTypes.bool,

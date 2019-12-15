@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
 import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
+import PropType from "../../proptypes.js";
 
 const Tabs = (props) => {
   const {film, filmTab, comments, onLoadComments, onCleanComments} = props;
@@ -25,9 +26,9 @@ const Tabs = (props) => {
 };
 
 Tabs.propTypes = {
-  film: PropTypes.object,
+  film: PropType.film,
   filmTab: PropTypes.string,
-  comments: PropTypes.arrayOf(PropTypes.object),
+  comments: PropType.review,
   onLoadComments: PropTypes.func,
   onCleanComments: PropTypes.func,
 };

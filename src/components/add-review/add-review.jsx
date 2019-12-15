@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Header from "../header/header.jsx";
+import PropType from "../../proptypes.js";
 
 const MAX_STARS = 5;
 const MAX_MESSAGE_LENGTH = 400;
@@ -96,14 +97,14 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   isAuthorizationRequired: PropTypes.bool,
-  userData: PropTypes.object,
-  films: PropTypes.array,
+  films: PropTypes.arrayOf(PropType.film),
   match: PropTypes.object,
   onSetComment: PropTypes.func,
   onSetRating: PropTypes.func,
   onSubmitFormReview: PropTypes.func,
   submitDisabled: PropTypes.bool,
   messageReview: PropTypes.string,
+  userData: PropType.userData,
 };
 
 export default AddReview;

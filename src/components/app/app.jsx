@@ -7,6 +7,7 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getFilmsLikeGenre, getGenre, getFilmPromo} from "../../reducer/data/data-selectors.js";
 import {getUserData} from "../../reducer/user/user-selectors.js";
+import PropType from "../../proptypes.js";
 
 import MainPage from "../main-page/main-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -148,24 +149,24 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropType.film).isRequired,
   state: PropTypes.object,
   handleSmallMovieCardClick: PropTypes.func,
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
-  filmPromo: PropTypes.object,
+  filmPromo: PropType.film,
   filmTab: PropTypes.string,
   likeFilms: PropTypes.array,
   isAuthorizationRequired: PropTypes.bool,
-  userData: PropTypes.object,
+  userData: PropType.userData,
   onAuthUser: PropTypes.func,
   filmId: PropTypes.number,
   onChangeFavoriteList: PropTypes.func,
-  filmsGenre: PropTypes.array,
-  comments: PropTypes.array,
+  filmsGenre: PropTypes.arrayOf(PropTypes.string),
+  comments: PropType.review,
   onLoadComments: PropTypes.func,
   onCleanComments: PropTypes.func,
-  favoriteFilms: PropTypes.array,
+  favoriteFilms: PropTypes.arrayOf(PropType.film),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

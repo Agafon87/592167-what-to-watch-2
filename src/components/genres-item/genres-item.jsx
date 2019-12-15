@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 const GenresItem = (props) => {
   const {films, genre, onGenreClick, filmsGenre} = props;
@@ -34,10 +35,10 @@ const GenresItem = (props) => {
 };
 
 GenresItem.propTypes = {
-  films: PropTypes.array,
+  films: PropTypes.arrayOf(PropType.film),
   genre: PropTypes.string,
   onGenreClick: PropTypes.func,
-  filmsGenre: PropTypes.array
+  filmsGenre: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default GenresItem;

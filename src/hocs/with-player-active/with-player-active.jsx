@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import FullscreenPlayer from "../../components/fullscreen-player/fullscreen-player.jsx";
 import withLoading from "../with-loading/with-loading.jsx";
 import withPlayerControls from "../with-player-control/with-player-control.jsx";
+import PropType from "../../proptypes.js";
 
 const Player = withPlayerControls(withLoading(FullscreenPlayer));
 
@@ -57,7 +57,7 @@ const withPlayerActive = (Component) => {
   }
 
   WithPlayerActive.propTypes = {
-    film: PropTypes.object,
+    film: PropType.film,
   };
 
   return WithPlayerActive;

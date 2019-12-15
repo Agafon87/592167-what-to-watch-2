@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import FilmsList from "../films-list/films-list.jsx";
 import withSmallMovieCard from "../../hocs/with-small-movie-card/with-small-movie-card.jsx";
+import PropType from "../../proptypes.js";
 
 const FilmsListWithSmallMovieCard = withSmallMovieCard(FilmsList);
 
@@ -18,7 +19,7 @@ const MoviesList = (props) => {
 };
 
 MoviesList.propTypes = {
-  films: PropTypes.array,
+  films: PropTypes.arrayOf(PropType.film),
   filmsCount: PropTypes.number,
 };
 

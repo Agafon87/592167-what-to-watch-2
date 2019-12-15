@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import PropType from "../../proptypes.js";
 
 const TIMEOUT = 1000;
 
@@ -63,7 +64,7 @@ class SmallMovieCard extends PureComponent {
 }
 
 SmallMovieCard.propTypes = {
-  film: PropTypes.object,
+  film: PropType.film,
   isLoading: PropTypes.bool,
   renderPlayer: PropTypes.func,
   onStopPreview: PropTypes.func,

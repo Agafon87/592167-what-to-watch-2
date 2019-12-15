@@ -27,7 +27,7 @@ const NavigationMoviePageTabs = (props) => {
 };
 
 NavigationMoviePageTabs.propTypes = {
-  tabItemList: PropTypes.array,
+  tabItemList: PropTypes.arrayOf(PropTypes.string),
   handleMoviePageTabClick: PropTypes.func,
   filmTab: PropTypes.string
 };

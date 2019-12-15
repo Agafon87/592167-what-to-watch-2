@@ -5,6 +5,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
 import Header from "../header/header.jsx";
+import PropType from "../../proptypes.js";
 
 const MainPage = (props) => {
   const {
@@ -119,19 +120,19 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropType.film).isRequired,
   genre: PropTypes.string,
   handleSmallMovieCardClick: PropTypes.func,
   onGenreClick: PropTypes.func,
   onCatalogMoreClick: PropTypes.func,
   filmsCount: PropTypes.number,
   isAuthorizationRequired: PropTypes.bool,
-  userData: PropTypes.object,
+  userData: PropType.userData,
   history: PropTypes.object,
-  film: PropTypes.object,
+  film: PropType.film,
   onSwitchPlayer: PropTypes.func,
   onSetToFavorites: PropTypes.func,
-  filmsGenre: PropTypes.array,
+  filmsGenre: PropTypes.arrayOf(PropTypes.string),
   isFavorite: PropTypes.bool,
 };
 

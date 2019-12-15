@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../../components/video-player/video-player.jsx";
+import PropType from "../../proptypes.js";
 
 const withLoading = (Component) => {
   class WithLoading extends PureComponent {
@@ -64,7 +65,7 @@ const withLoading = (Component) => {
   }
 
   WithLoading.propTypes = {
-    film: PropTypes.object,
+    film: PropType.film,
     isPlaying: PropTypes.bool.isRequired,
     isFull: PropTypes.bool.isRequired,
   };

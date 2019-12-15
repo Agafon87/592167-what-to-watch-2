@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getFilmsLikeGenre, getFavoriteFilms} from "../../reducer/data/data-selectors.js";
+import PropType from "../../proptypes.js";
 
 const MAX_COUNT_LIKE_FILMS = 4;
 
@@ -89,11 +90,11 @@ const withMoviePageDescription = (Component) => {
     }
   }
   WithMoviePageDescription.propTypes = {
-    films: PropTypes.array,
+    films: PropTypes.arrayOf(PropType.film),
     match: PropTypes.object,
     history: PropTypes.object,
     onChangeFavoriteList: PropTypes.func,
-    favoriteFilms: PropTypes.array,
+    favoriteFilms: PropTypes.arrayOf(PropType.film),
   };
 
   return connect(mapStateToProps)(WithMoviePageDescription);
