@@ -20,7 +20,7 @@ exports[`AddReview component renders correctly 1`] = `
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header user-page__head"
     >
       <div
         className="logo"

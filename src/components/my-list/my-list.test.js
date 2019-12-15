@@ -126,10 +126,18 @@ const mock = {
   ],
   history: {},
   handleSmallMovieCardClick: jest.fn(),
+  userData: {},
+  isAuthorizationRequired: false,
 };
 
 describe(`MyList component`, () => {
-  const {favoriteFilms, history, handleSmallMovieCardClick} = mock;
+  const {
+    favoriteFilms,
+    history,
+    handleSmallMovieCardClick,
+    userData,
+    isAuthorizationRequired
+  } = mock;
 
   it(`renders correctly`, () => {
     const tree = renderer.create(
@@ -138,6 +146,8 @@ describe(`MyList component`, () => {
             favoriteFilms={favoriteFilms}
             history={history}
             handleSmallMovieCardClick={handleSmallMovieCardClick}
+            isAuthorizationRequired={isAuthorizationRequired}
+            userData={userData}
           />
         </BrowserRouter>,
         {createNodeMock: (el) => {

@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {withRouter} from "react-router-dom";
 
 const withSignIn = (Component) => {
   class WithSignIn extends PureComponent {
@@ -62,7 +63,7 @@ const withSignIn = (Component) => {
     history: PropTypes.object,
   };
 
-  return WithSignIn;
+  return withRouter(WithSignIn);
 };
 
 export default withSignIn;

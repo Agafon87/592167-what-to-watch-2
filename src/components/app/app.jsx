@@ -44,6 +44,21 @@ const PrivateRoute = ({component: Component, data, ...rest}) => {
   />);
 };
 
+// eslint-disable-next-line no-shadow,react/prop-types
+const RouteRedirectToMainPage = ({component: Component, data, ...rest}) => {
+  const {isAuth} = rest;
+  return (<Route
+    {...rest}
+    render={(props) =>
+      isAuth ? (
+        <Redirect to={`/`}/>
+      ) : (
+        <Component {...props} {...data}/>
+      )
+    }
+  />);
+};
+
 
 class App extends PureComponent {
   render() {
@@ -90,15 +105,11 @@ class App extends PureComponent {
             />
           )}
         />
-        <Route
+        <RouteRedirectToMainPage
           path="/login"
-          render={({history}) => (
-            <WithSignIn
-              onAuthUser={onAuthUser}
-              userData={userData}
-              history={history}
-            />
-          )}
+          isAuth={isAuth}
+          component={WithSignIn}
+          data={{onAuthUser, userData}}
         />
         <Route
           path="/films/:id"
@@ -126,7 +137,7 @@ class App extends PureComponent {
           exac
           isAuth={isAuth}
           component={WithMyList}
-          data={{handleSmallMovieCardClick, favoriteFilms}}
+          data={{handleSmallMovieCardClick, favoriteFilms, isAuthorizationRequired, userData}}
         />
         <PrivateRoute
           path="/films/:id/review"

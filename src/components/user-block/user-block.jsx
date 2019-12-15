@@ -8,7 +8,7 @@ const renderUserBlock = (userData) => {
   } else {
     const renderAvatar = () => {
       return <div className="user-block__avatar">
-        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+        <img src={`https://htmlacademy-react-2.appspot.com/${userData.avatar_url}`} alt="User avatar" width="63" height="63"/>
       </div>;
     };
 

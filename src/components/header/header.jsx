@@ -6,7 +6,7 @@ import Logo from "../logo/logo.jsx";
 
 const Header = (props) => {
   const {userData, isMainPage} = props;
-  return <header className="page-header movie-card__head">
+  return <header className="page-header user-page__head">
     <Logo isMainPage={isMainPage}/>
 
     <UserBlock userData={userData} />
