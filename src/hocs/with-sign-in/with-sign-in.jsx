@@ -18,20 +18,6 @@ const withSignIn = (Component) => {
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
     }
 
-    render() {
-      const {email, password, statusCode} = this.state;
-
-      return <Component
-        {...this.props}
-        email={email}
-        password={password}
-        statusCode={statusCode}
-        onSetEmail={this._handleSetEmail}
-        onSetPassword={this._handleSetPassword}
-        onFormSubmit={this._handleFormSubmit}
-      />;
-    }
-
     _handleSetEmail(email) {
       this.setState({email});
     }
@@ -54,6 +40,20 @@ const withSignIn = (Component) => {
       };
 
       onAuthUser({email, password}, handleSuccess, handleError);
+    }
+
+    render() {
+      const {email, password, statusCode} = this.state;
+
+      return <Component
+        {...this.props}
+        email={email}
+        password={password}
+        statusCode={statusCode}
+        onSetEmail={this._handleSetEmail}
+        onSetPassword={this._handleSetPassword}
+        onFormSubmit={this._handleFormSubmit}
+      />;
     }
   }
 

@@ -20,6 +20,20 @@ const withPlayerActive = (Component) => {
       this._handleCatalogMoreClick = this._handleCatalogMoreClick.bind(this);
     }
 
+    _handleTogglePlayerMode() {
+      this.setState({
+        isPlayerActive: !this.state.isPlayerActive,
+      });
+    }
+
+    _handleCatalogMoreClick() {
+      this.setState((prevState) => {
+        return {
+          filmsCount: prevState.filmsCount + 20
+        };
+      });
+    }
+
     render() {
       const {isPlayerActive} = this.state;
       const {film} = this.props;
@@ -39,20 +53,6 @@ const withPlayerActive = (Component) => {
         film={film}
         onSwitchPlayer={this._handleTogglePlayerMode}
       />;
-    }
-
-    _handleTogglePlayerMode() {
-      this.setState({
-        isPlayerActive: !this.state.isPlayerActive,
-      });
-    }
-
-    _handleCatalogMoreClick() {
-      this.setState((prevState) => {
-        return {
-          filmsCount: prevState.filmsCount + 20
-        };
-      });
     }
   }
 

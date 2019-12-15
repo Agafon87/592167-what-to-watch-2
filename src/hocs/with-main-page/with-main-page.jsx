@@ -15,15 +15,6 @@ const withMainPage = (Component) => {
       this._handleSetToFavorites = this._handleSetToFavorites.bind(this);
     }
 
-    render() {
-      return <Component
-        {...this.props}
-        onCatalogMoreClick={this._handleCatalogMoreClick}
-        onSetToFavorites={this._handleSetToFavorites}
-        filmsCount={this.state.filmsCount}
-      />;
-    }
-
     _handleCatalogMoreClick() {
       this.setState((prevState) => {
         return {
@@ -42,6 +33,15 @@ const withMainPage = (Component) => {
     _handleFavoriteListError() {
       const {history} = this.props;
       history.push(`/login`);
+    }
+
+    render() {
+      return <Component
+        {...this.props}
+        onCatalogMoreClick={this._handleCatalogMoreClick}
+        onSetToFavorites={this._handleSetToFavorites}
+        filmsCount={this.state.filmsCount}
+      />;
     }
   }
 

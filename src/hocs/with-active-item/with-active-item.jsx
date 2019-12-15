@@ -13,16 +13,16 @@ const withActiveItem = (Component) => {
       };
     }
 
+    _handleGetScores(setElements) {
+      const tempSet = new Set(setElements.map((it) => it.genre));
+      return [...tempSet];
+    }
+
     render() {
       return <Component
         {...this.props}
         genreList={this._handleGetScores(this.props.films)}
       />;
-    }
-
-    _handleGetScores(setElements) {
-      const tempSet = new Set(setElements.map((it) => it.genre));
-      return [...tempSet];
     }
   }
 

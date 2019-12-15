@@ -13,6 +13,10 @@ const withAppFilm = (Component) => {
       };
     }
 
+    _handleGetFilm(films, id) {
+      return films.find((it) => it.id === id);
+    }
+
     render() {
       const {films} = this.props;
 
@@ -21,10 +25,6 @@ const withAppFilm = (Component) => {
         film={this._handleGetFilm(films, this.state.filmId)}
         filmId={this.state.filmId}
       />;
-    }
-
-    _handleGetFilm(films, id) {
-      return films.find((it) => it.id === id);
     }
   }
 

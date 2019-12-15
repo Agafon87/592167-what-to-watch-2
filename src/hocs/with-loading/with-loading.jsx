@@ -18,22 +18,6 @@ const withLoading = (Component) => {
       this._handleRenderPlayer = this._handleRenderPlayer.bind(this);
     }
 
-    render() {
-      const {
-        isLoading,
-        duration,
-        currentTime
-      } = this.state;
-
-      return <Component
-        {...this.props}
-        isLoading={isLoading}
-        currentTime={currentTime}
-        duration={duration}
-        renderPlayer={this._handleRenderPlayer}
-      />;
-    }
-
     _handleLoaded(duration) {
       this.setState({
         isLoading: false,
@@ -60,6 +44,22 @@ const withLoading = (Component) => {
           className={options.className}
         />
       );
+    }
+
+    render() {
+      const {
+        isLoading,
+        duration,
+        currentTime
+      } = this.state;
+
+      return <Component
+        {...this.props}
+        isLoading={isLoading}
+        currentTime={currentTime}
+        duration={duration}
+        renderPlayer={this._handleRenderPlayer}
+      />;
     }
   }
 

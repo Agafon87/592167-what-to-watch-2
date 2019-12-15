@@ -22,16 +22,6 @@ const withAddReview = (Component) => {
       this._handleSetRating = this._handleSetRating.bind(this);
       this._handleSubmitFormReview = this._handleSubmitFormReview.bind(this);
     }
-    render() {
-      return <Component
-        {...this.props}
-        onSetComment={this._handleSetComment}
-        onSetRating={this._handleSetRating}
-        onSubmitFormReview={this._handleSubmitFormReview}
-        submitDisabled={this.state.submitDisabled}
-        messageReview={this._getMessage(this.state.rating, this.state.comment)}
-      />;
-    }
 
     _handleSetComment(comment) {
       this.setState({comment});
@@ -49,7 +39,7 @@ const withAddReview = (Component) => {
       return changeButtonStatus(comment) ? `Message should have at least 50 and maximum 400 characters!` : ``;
     }
 
-    _getMessage(rating, comment) {
+    _handleGetMessage(rating, comment) {
       const errors = [];
       errors.push(this._handleGetMessageForRating(rating));
       errors.push(this._handleGetMessageForComment(comment));
@@ -75,6 +65,17 @@ const withAddReview = (Component) => {
       const hendleError = () => {};
 
       onSubmitFormReview({comment, rating}, match.params.id, hendleSuccess, hendleError);
+    }
+
+    render() {
+      return <Component
+        {...this.props}
+        onSetComment={this._handleSetComment}
+        onSetRating={this._handleSetRating}
+        onSubmitFormReview={this._handleSubmitFormReview}
+        submitDisabled={this.state.submitDisabled}
+        messageReview={this._handleGetMessage(this.state.rating, this.state.comment)}
+      />;
     }
   }
 

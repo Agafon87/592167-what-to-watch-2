@@ -12,8 +12,8 @@ const withMoviePageDescription = (Component) => {
 
       const {match, favoriteFilms} = this.props;
 
-      const film = this._getFilmById(parseInt(match.params.id, 10));
-      const likeFilms = this._getLikeFilms(film);
+      const film = this._handleGetFilmById(parseInt(match.params.id, 10));
+      const likeFilms = this._handleGetLikeFilms(film);
       const isFavorite = favoriteFilms.some((it) => it.id === film.id);
 
       this.state = {
@@ -27,24 +27,12 @@ const withMoviePageDescription = (Component) => {
       this._handleSetToFavorites = this._handleSetToFavorites.bind(this);
     }
 
-    render() {
-      return <Component
-        {...this.props}
-        handleMoviePageTabClick={this.handleMoviePageTabClick}
-        filmTab={this.state.filmTab}
-        likeFilms={this.state.likeFilms}
-        film={this.state.film}
-        onSetToFavorites={this._handleSetToFavorites}
-        isFavorite={this.state.isFavorite}
-      />;
-    }
-
     componentDidUpdate(prevProps) {
       const {films, match, favoriteFilms} = this.props;
 
       if (!prevProps.films.length && films.length || prevProps.match.params.id !== match.params.id || prevProps.favoriteFilms.length !== favoriteFilms.length) {
-        const film = this._getFilmById(parseInt(match.params.id, 10));
-        const likeFilms = this._getLikeFilms(film);
+        const film = this._handleGetFilmById(parseInt(match.params.id, 10));
+        const likeFilms = this._handleGetLikeFilms(film);
         const isFavorite = favoriteFilms.some((it) => it.id === film.id);
         const filmTab = `overview`;
 
@@ -59,13 +47,13 @@ const withMoviePageDescription = (Component) => {
       });
     }
 
-    _getFilmById(id) {
+    _handleGetFilmById(id) {
       const {films} = this.props;
 
       return films.find((it) => it.id === id) || {};
     }
 
-    _getLikeFilms(film) {
+    _handleGetLikeFilms(film) {
       const {films} = this.props;
 
       return films
@@ -86,6 +74,18 @@ const withMoviePageDescription = (Component) => {
       const {history} = this.props;
       const {film} = this.state;
       history.push(`/login?redirect=/film/${film.id}`);
+    }
+
+    render() {
+      return <Component
+        {...this.props}
+        handleMoviePageTabClick={this.handleMoviePageTabClick}
+        filmTab={this.state.filmTab}
+        likeFilms={this.state.likeFilms}
+        film={this.state.film}
+        onSetToFavorites={this._handleSetToFavorites}
+        isFavorite={this.state.isFavorite}
+      />;
     }
   }
   WithMoviePageDescription.propTypes = {

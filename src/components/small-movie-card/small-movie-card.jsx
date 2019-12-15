@@ -13,6 +13,28 @@ class SmallMovieCard extends PureComponent {
     this._handleMouseEnter = this._handleMouseEnter.bind(this);
   }
 
+  componentWillUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+  }
+
+  _handleMouseEnter(evt) {
+    const {currentTarget} = evt;
+    const {film, onStartPreview, onStopPreview} = this.props;
+
+    this.timeoutId = setTimeout(() => {
+      onStartPreview(film.name);
+    }, TIMEOUT);
+
+    currentTarget.onmouseleave = () => {
+      onStopPreview();
+      clearTimeout(this.timeoutId);
+      currentTarget.onmouseleave = null;
+      delete this.timeoutId;
+    };
+  }
+
   render() {
     const {isLoading, film, renderPlayer} = this.props;
 
@@ -37,28 +59,6 @@ class SmallMovieCard extends PureComponent {
         </h3>
       </article>
     );
-  }
-
-  componentWillUnmount() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-  }
-
-  _handleMouseEnter(evt) {
-    const {currentTarget} = evt;
-    const {film, onStartPreview, onStopPreview} = this.props;
-
-    this.timeoutId = setTimeout(() => {
-      onStartPreview(film.name);
-    }, TIMEOUT);
-
-    currentTarget.onmouseleave = () => {
-      onStopPreview();
-      clearTimeout(this.timeoutId);
-      currentTarget.onmouseleave = null;
-      delete this.timeoutId;
-    };
   }
 }
 
