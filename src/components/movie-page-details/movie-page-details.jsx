@@ -38,8 +38,8 @@ const MoviePageDetails = (props) => {
   </React.Fragment>;
 };
 
-export default MoviePageDetails;
-
 MoviePageDetails.propTypes = {
   film: PropTypes.object
 };
+
+export default MoviePageDetails;
