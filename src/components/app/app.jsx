@@ -163,7 +163,7 @@ App.propTypes = {
   filmId: PropTypes.number,
   onChangeFavoriteList: PropTypes.func,
   filmsGenre: PropTypes.arrayOf(PropTypes.string),
-  comments: PropType.review,
+  comments: PropTypes.arrayOf(PropType.review),
   onLoadComments: PropTypes.func,
   onCleanComments: PropTypes.func,
   favoriteFilms: PropTypes.arrayOf(PropType.film),

@@ -28,7 +28,7 @@ const Tabs = (props) => {
 Tabs.propTypes = {
   film: PropType.film,
   filmTab: PropTypes.string,
-  comments: PropType.review,
+  comments: PropTypes.arrayOf(PropType.review),
   onLoadComments: PropTypes.func,
   onCleanComments: PropTypes.func,
 };

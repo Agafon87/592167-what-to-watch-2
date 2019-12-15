@@ -77,7 +77,7 @@ class MoviePageReviews extends PureComponent {
 MoviePageReviews.propTypes = {
   film: PropType.film,
   onLoadComments: PropTypes.func,
-  comments: PropType.review,
+  comments: PropTypes.arrayOf(PropType.review),
   onCleanComments: PropTypes.func,
 };
 
