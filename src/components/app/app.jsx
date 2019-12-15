@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route, Redirect} from "react-router-dom";
@@ -45,7 +45,7 @@ const PrivateRoute = ({component: Component, data, ...rest}) => {
 };
 
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     const {
       films,

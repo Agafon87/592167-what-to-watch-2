@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 
 import MoviesList from "../movies-list/movies-list.jsx";
@@ -6,7 +6,7 @@ import GenresItem from "../genres-item/genres-item.jsx";
 import CatalogMore from "../catalog-more/catalog-more.jsx";
 import Header from "../header/header.jsx";
 
-class MainPage extends Component {
+class MainPage extends PureComponent {
   constructor(props) {
     super(props);
   }
