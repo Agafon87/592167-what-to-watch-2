@@ -180,7 +180,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onGenreClick: (filmsList, genre) => {
     dispatch(DataActionCreators[`CHANGE_GENRE`](genre));
-    // dispatch(DataActionCreators[`CHANGE_FILMS_LIST`](filmsList, genre));
   },
   onLoadComments: (id) => {
     dispatch(Operation.loadComments(id));
