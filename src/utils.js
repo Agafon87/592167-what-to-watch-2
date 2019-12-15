@@ -1,4 +1,4 @@
-const RATING_NUMBERS = {
+const RatingNumbers = {
   'THREE': 3,
   'FIVE': 5,
   'EIGHT': 8,
@@ -9,20 +9,19 @@ const MIN_MESSAGE_LENGTH = 50;
 const MAX_MESSAGE_LENGTH = 400;
 
 const SECONDS_IN_MINUTE = 60;
-// const MINUTES_IN_HOUR = 60;
 const SECONDS_IN_HOUR = 3600;
 
 const formatNumber = (number) => `${number < 10 ? 0 : ``}${number}`;
 
 
 export const getRating = (num) => {
-  if (num < RATING_NUMBERS.THREE) {
+  if (num < RatingNumbers.THREE) {
     return `Bad`;
-  } else if (num >= RATING_NUMBERS.THREE && num < RATING_NUMBERS.FIVE) {
+  } else if (num >= RatingNumbers.THREE && num < RatingNumbers.FIVE) {
     return `Normal`;
-  } else if (num >= RATING_NUMBERS.FIVE && num < RATING_NUMBERS.EIGHT) {
+  } else if (num >= RatingNumbers.FIVE && num < RatingNumbers.EIGHT) {
     return `Good`;
-  } else if (num >= RATING_NUMBERS.EIGHT && num < RATING_NUMBERS.TEN) {
+  } else if (num >= RatingNumbers.EIGHT && num < RatingNumbers.TEN) {
     return `Very good`;
   }
   return `Awesome`;
