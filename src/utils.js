@@ -1,27 +1,32 @@
-const RatingNumbers = {
+const RatingNumber = {
   'THREE': 3,
   'FIVE': 5,
   'EIGHT': 8,
   'TEN': 10,
 };
 
-const MIN_MESSAGE_LENGTH = 50;
-const MAX_MESSAGE_LENGTH = 400;
+const MessageLength = {
+  'MIN': 50,
+  'MAX': 400,
+};
 
-const SECONDS_IN_MINUTE = 60;
-const SECONDS_IN_HOUR = 3600;
+const SecondsIn = {
+  'MINUTE': 60,
+  'HOUR': 3600,
+};
+
 
 const formatNumber = (number) => `${number < 10 ? 0 : ``}${number}`;
 
 
 export const getRating = (num) => {
-  if (num < RatingNumbers.THREE) {
+  if (num < RatingNumber.THREE) {
     return `Bad`;
-  } else if (num >= RatingNumbers.THREE && num < RatingNumbers.FIVE) {
+  } else if (num >= RatingNumber.THREE && num < RatingNumber.FIVE) {
     return `Normal`;
-  } else if (num >= RatingNumbers.FIVE && num < RatingNumbers.EIGHT) {
+  } else if (num >= RatingNumber.FIVE && num < RatingNumber.EIGHT) {
     return `Good`;
-  } else if (num >= RatingNumbers.EIGHT && num < RatingNumbers.TEN) {
+  } else if (num >= RatingNumber.EIGHT && num < RatingNumber.TEN) {
     return `Very good`;
   }
   return `Awesome`;
@@ -32,17 +37,14 @@ export const getNewDate = (dateString) => {
 };
 
 export const changeButtonStatus = (review) => {
-  if (review.length >= MIN_MESSAGE_LENGTH && review.length <= MAX_MESSAGE_LENGTH) {
-    return false;
-  }
-  return true;
+  return !(review.length >= MessageLength.MIN && review.length <= MessageLength.MAX);
 };
 
 export const parseTime = (seconds) => {
-  const hours = Math.floor(seconds / SECONDS_IN_HOUR);
-  seconds -= (hours * SECONDS_IN_HOUR);
-  const minutes = Math.floor(seconds / SECONDS_IN_MINUTE);
-  seconds -= (minutes * SECONDS_IN_MINUTE);
+  const hours = Math.floor(seconds / SecondsIn.HOUR);
+  seconds -= (hours * SecondsIn.HOUR);
+  const minutes = Math.floor(seconds / SecondsIn.MINUTE);
+  seconds -= (minutes * SecondsIn.MINUTE);
 
   return {
     hours: formatNumber(hours),
