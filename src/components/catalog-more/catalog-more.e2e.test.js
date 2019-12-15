@@ -9,7 +9,6 @@ it(`CatalogMore correctly e2e test finish`, () => {
   const clickHandler = jest.fn();
   const catalogMore = shallow(<CatalogMore
     films={[]}
-    // filmsCount={8}
     onCatalogMoreClick={clickHandler}
   />);
 
