@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route, Redirect} from "react-router-dom";
@@ -60,95 +60,92 @@ const RouteRedirectToMainPage = ({component: Component, data, ...rest}) => {
 };
 
 
-class App extends PureComponent {
-  render() {
-    const {
-      films,
-      filmPromo,
-      genre,
-      filmTab,
-      userData,
-      filmId,
-      onGenreClick,
-      isAuthorizationRequired,
-      handleSmallMovieCardClick,
-      onAuthUser,
-      onChangeFavoriteList,
-      filmsGenre,
-      comments,
-      onLoadComments,
-      onCleanComments,
-      favoriteFilms,
-    } = this.props;
+const App = (props) => {
+  const {
+    films,
+    filmPromo,
+    genre,
+    filmTab,
+    userData,
+    filmId,
+    onGenreClick,
+    isAuthorizationRequired,
+    handleSmallMovieCardClick,
+    onAuthUser,
+    onChangeFavoriteList,
+    filmsGenre,
+    comments,
+    onLoadComments,
+    onCleanComments,
+    favoriteFilms,
+  } = props;
 
-    const isAuth = !!Object.keys(userData).length;
-
-    return (
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={({history, match}) => (
-            <MainPageWithPlayerActive
-              films={films}
-              genre={genre}
-              handleSmallMovieCardClick={handleSmallMovieCardClick}
-              onGenreClick={onGenreClick}
-              filmsGenre={filmsGenre}
-              isAuthorizationRequired={isAuthorizationRequired}
-              isFavorite={favoriteFilms.some((film) => film.id === filmPromo.id)}
-              userData={userData}
-              film={filmPromo}
-              history={history}
-              match={match}
-              onChangeFavoriteList={onChangeFavoriteList}
-            />
-          )}
-        />
-        <RouteRedirectToMainPage
-          path="/login"
-          isAuth={isAuth}
-          component={WithSignIn}
-          data={{onAuthUser, userData}}
-        />
-        <Route
-          path="/films/:id"
-          exact
-          render={({match, history}) => (
-            <MoviePageWithPlayerActive
-              films={films}
-              filmId={filmId}
-              filmTab={filmTab}
-              genre={genre}
-              handleSmallMovieCardClick={handleSmallMovieCardClick}
-              isAuthorizationRequired={isAuthorizationRequired}
-              userData={userData}
-              match={match}
-              history={history}
-              onChangeFavoriteList={onChangeFavoriteList}
-              comments={comments}
-              onLoadComments={onLoadComments}
-              onCleanComments={onCleanComments}
-            />
-          )}
-        />
-        <PrivateRoute
-          path="/mylist"
-          exac
-          isAuth={isAuth}
-          component={WithMyList}
-          data={{handleSmallMovieCardClick, favoriteFilms, isAuthorizationRequired, userData}}
-        />
-        <PrivateRoute
-          path="/films/:id/review"
-          isAuth={isAuth}
-          component={WithAddReview}
-          data={{films, isAuthorizationRequired, userData}}
-        />
-      </Switch>
-    );
-  }
-}
+  const isAuth = !!Object.keys(userData).length;
+  return (
+    <Switch>
+      <Route
+        path="/"
+        exact
+        render={({history, match}) => (
+          <MainPageWithPlayerActive
+            films={films}
+            genre={genre}
+            handleSmallMovieCardClick={handleSmallMovieCardClick}
+            onGenreClick={onGenreClick}
+            filmsGenre={filmsGenre}
+            isAuthorizationRequired={isAuthorizationRequired}
+            isFavorite={favoriteFilms.some((film) => film.id === filmPromo.id)}
+            userData={userData}
+            film={filmPromo}
+            history={history}
+            match={match}
+            onChangeFavoriteList={onChangeFavoriteList}
+          />
+        )}
+      />
+      <RouteRedirectToMainPage
+        path="/login"
+        isAuth={isAuth}
+        component={WithSignIn}
+        data={{onAuthUser, userData}}
+      />
+      <Route
+        path="/films/:id"
+        exact
+        render={({match, history}) => (
+          <MoviePageWithPlayerActive
+            films={films}
+            filmId={filmId}
+            filmTab={filmTab}
+            genre={genre}
+            handleSmallMovieCardClick={handleSmallMovieCardClick}
+            isAuthorizationRequired={isAuthorizationRequired}
+            userData={userData}
+            match={match}
+            history={history}
+            onChangeFavoriteList={onChangeFavoriteList}
+            comments={comments}
+            onLoadComments={onLoadComments}
+            onCleanComments={onCleanComments}
+          />
+        )}
+      />
+      <PrivateRoute
+        path="/mylist"
+        exac
+        isAuth={isAuth}
+        component={WithMyList}
+        data={{handleSmallMovieCardClick, favoriteFilms, isAuthorizationRequired, userData}}
+      />
+      <PrivateRoute
+        path="/films/:id/review"
+        isAuth={isAuth}
+        component={WithAddReview}
+        data={{films, isAuthorizationRequired, userData}}
+      />
+    </Switch>
+  );
+};
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
