@@ -169,8 +169,6 @@ describe(`AddReview component`, () => {
 
     const submitForm = jest.fn();
 
-    expect(elem.find(`button`).hasAttr(`disabled`)).toEqual(false);
-
     elem.find(`form`).simulate(`submit`, {
       preventDefault: submitForm,
     });
